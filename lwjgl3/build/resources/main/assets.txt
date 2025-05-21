@@ -1,4 +1,97 @@
+AudioClip/Arrow Fly 3_3.wav
+AudioClip/Bat_Death_02.wav
+AudioClip/Big_Weapon_Whoosh.wav
+AudioClip/Big_Weapon_Whoosh_With_Echo.wav
+AudioClip/Blood_Splash_Quick_01.wav
+AudioClip/Buff_BeastsPower.wav
+AudioClip/Buff_Intelligence.wav
+AudioClip/Buff_Positive.wav
+AudioClip/Buff_Power_Up_01.wav
+AudioClip/Coins (10).wav
+AudioClip/Count Prize (Single Tick).wav
+AudioClip/Crystal Reward Tick.wav
+AudioClip/Dagger_Whoosh_02.wav
+AudioClip/Dagger_Whoosh_03.wav
+AudioClip/Dagger_Whoosh_04.wav
+AudioClip/Debuff_Beasts.wav
+AudioClip/Debuff_Positive.wav
+AudioClip/Debuff_Speed.wav
+AudioClip/Drum Roll (3).wav
+AudioClip/Explosion_Blood_01.wav
+AudioClip/Footsteps_Casual_Grass_01.wav
+AudioClip/Footsteps_Casual_Grass_02.wav
+AudioClip/Footsteps_Casual_Grass_03.wav
+AudioClip/Heal_Short.wav
+AudioClip/Item Lock (1).wav
+AudioClip/Lightning Spelll 18.wav
+AudioClip/Lightning Spelll 19.wav
+AudioClip/Monster_2_Attack_Quick_01_WITH_ECHO.wav
+AudioClip/Monster_2_RecieveAttack_HighIntensity_01.wav
+AudioClip/Obtain_Points_01.wav
+AudioClip/Obtain_Points_02.wav
+AudioClip/Obtain_Points_03.wav
+AudioClip/Obtain_Points_04.wav
+AudioClip/Obtain_Points_05.wav
+AudioClip/Obtain_Points_06.wav
+AudioClip/Pop (3).wav
+AudioClip/Pretty Dungeon LOOP.wav
+AudioClip/Shield_Poison.wav
+AudioClip/Special & Powerup (10).wav
+AudioClip/Special & Powerup (11).wav
+AudioClip/Special & Powerup (13).wav
+AudioClip/Special & Powerup (16).wav
+AudioClip/Special & Powerup (17).wav
+AudioClip/Special & Powerup (19).wav
+AudioClip/Special & Powerup (24).wav
+AudioClip/Special & Powerup (8).wav
+AudioClip/SpellBook_NewSpell_01.wav
+AudioClip/Spell_Air_03.wav
+AudioClip/Spell_Air_Small_Whoosh_03.wav
+AudioClip/Spell_BlackMagic_Short_01.wav
+AudioClip/Spell_BlackMagic_Short_02.wav
+AudioClip/Spell_BlackMagic_Short_03.wav
+AudioClip/Spell_Curse_01.wav
+AudioClip/Spell_Explosion_Magic_02.wav
+AudioClip/Spell_Fire_Impact_01.wav
+AudioClip/Spell_Fire_Small_Whoosh_01.wav
+AudioClip/Spell_Fire_Small_Whoosh_02.wav
+AudioClip/Spell_Fire_Small_Whoosh_03.wav
+AudioClip/Spell_Fire_Whoosh_02.wav
+AudioClip/Spell_Freeze.wav
+AudioClip/Spell_IceSpear_03.wav
+AudioClip/Spell_Ice_Impact_03.wav
+AudioClip/Spell_Projectile_Shadow_01.wav
+AudioClip/Spell_Recharge_Version_01.wav
+AudioClip/Spell_Water_01.wav
+AudioClip/Spell_Water_02.wav
+AudioClip/Spell_Wind_02.wav
+AudioClip/Standard_Weapon_Whoosh_01.wav
+AudioClip/Standard_Weapon_Whoosh_02.wav
+AudioClip/Standard_Weapon_Whoosh_03.wav
+AudioClip/Switch (8).wav
+AudioClip/Torch_Whoosh_02.wav
+AudioClip/UI Click 36.wav
+AudioClip/Wasteland Combat Loop.wav
+AudioClip/Weapon_Shotgun_Reload.wav
+AudioClip/Weapon_Various_Whooshes_Movements_01.wav
+AudioClip/Weapon_Various_Whooshes_Movements_04.wav
+AudioClip/Whoosh 12_2.wav
+AudioClip/Whoosh 9_5.wav
+AudioClip/You Lose (4).wav
+AudioClip/You Win (2).wav
+AudioClip/deadly_lazar_shot_24.wav
+AudioClip/sfx_lowhealth_alarmloop1.wav
+AudioClip/sfx_sounds_impact1.wav
+AudioClip/single_shot.wav
 BackGround/mainMenubackgroundImage.png
+Font/ChevyRay - Express.ttf
+Font/ChevyRay - Lantern.ttf
+Font/LiberationSans.ttf
+Font/NotoSans-Regular.ttf
+Font/NotoSansJP-Regular.otf
+Font/NotoSansKR-Regular.otf
+Font/NotoSansSC-Regular.otf
+Font/OpenSans.ttf
 Images/Sprite/AbbySpecial_0.png
 Images/Sprite/AbbySpecial_1.png
 Images/Sprite/AbbySpecial_2.png

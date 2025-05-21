@@ -20,7 +20,7 @@ public class TillDawn extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        getTillDawn().setScreen(new ProfileMenu());
+        getTillDawn().setScreen(new GameView());
     }
 
     @Override

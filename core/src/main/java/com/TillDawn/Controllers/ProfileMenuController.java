@@ -1,9 +1,17 @@
 package com.TillDawn.Controllers;
 
+import com.TillDawn.Models.App;
 import com.TillDawn.Models.GameAssetManager;
+import com.TillDawn.Models.User;
+import com.TillDawn.TillDawn;
+import com.TillDawn.Views.MainMenu;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ProfileMenuController {
+    private TillDawn game = TillDawn.getTillDawn();
+
     private final Skin skin = GameAssetManager.getManager().getSkin();
 
     private TextField newUserName = new TextField("" ,  skin);
@@ -46,6 +54,84 @@ public class ProfileMenuController {
         table.add(deleteAccount).fillX().expandX().pad(0 , 800 , 0 , 800);
         table.row().pad(20, 0, 10, 0);
         table.add(backButton).fillX().expandX().pad(0 , 800 , 0 , 800);
+    }
+
+    private void handleUsername(){
+        changeButtonUsername.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                String username = newUserName.getText();
+                if (username == null || username.isEmpty()){
+                    errorLabelUsername.setText("Username can't be empty!");
+                    return;
+                }
+
+                User user = User.getUserByUserName(username);
+                if (user != null){
+                    errorLabelUsername.setText("Username is already taken!");
+                    return;
+                }
+
+                App.getApp().getLoggedInUser().setUsername(username);
+                errorLabelUsername.setText("Successful!");
+            }
+        });
+    }
+
+    private void handlePassword(){
+        changeButtonPassword.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                String password = newPassWord.getText();
+
+                if (password == null || password.isEmpty() || !ControllersManager.signUpMenuController.isPasswordStrong(password)
+                        || password.equals(App.getApp().getLoggedInUser().getPassword())){
+                    errorLabelPassword.setText("Can't use this password!");
+                    return;
+                }
+
+                App.getApp().getLoggedInUser().setPassword(password);
+                errorLabelPassword.setText("Successful!");
+            }
+        });
+    }
+
+    private void handleDelete(){
+        deleteAccount.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                App.getApp().getUsers().remove(App.getApp().getLoggedInUser());
+                App.getApp().setLoggedInUser(null);
+                game.getScreen().dispose();
+                game.setScreen(new MainMenu());
+            }
+        });
+    }
+
+    private void changeAvatar(){
+        avatarButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //TODO
+            }
+        });
+    }
+
+    private void handleBack(){
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new MainMenu());
+            }
+        });
+    }
+
+    public void handleButtons(){
+        handleDelete();
+        handlePassword();
+        handleUsername();
+        handleBack();
     }
 
     public Table getTable() {

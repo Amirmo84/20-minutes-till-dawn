@@ -121,11 +121,11 @@ public class SignUpMenuController {
                 }
                 User user = new User(username, password, security.getText(), avatarPath);
                 App.getApp().getUsers().add(user);
+                App.getApp().setLoggedInUser(user);
                 resultLabel.setText("");
                 passwordField.setText("");
                 registerField.setText("");
                 handleRandomAvatar();
-                //TODO goto another menu
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());
             }

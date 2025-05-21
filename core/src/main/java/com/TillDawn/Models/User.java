@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class User {
     private String username;
     private String password;
-    private String answer;
+    private final String answer;
     private String avatarPath;
 
     public User(String username, String password, String answer, String avatarPath) {
@@ -30,6 +30,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static User getUserByUserName(String username) {
