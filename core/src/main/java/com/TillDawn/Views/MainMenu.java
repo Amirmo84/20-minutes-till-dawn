@@ -1,37 +1,40 @@
 package com.TillDawn.Views;
 
 import com.TillDawn.Controllers.ControllersManager;
+import com.TillDawn.TillDawn;
 import com.TillDawn.Models.GameAssetManager;
-import com.TillDawn.Models.Result;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class SignUpMenu implements Screen {
+public class MainMenu implements Screen {
     private Stage stage;
 
     @Override
     public void show() {
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(ControllersManager.signUpMenuController.getTable());
+        stage.addActor(ControllersManager.mainMenuController.getTable());
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-        ControllersManager.signUpMenuController.handleButtons();
+        ControllersManager.mainMenuController.handleButtons();
     }
 
     @Override
-    public void resize(int i, int i1) {
+    public void resize(int width, int height) {
 
     }
 

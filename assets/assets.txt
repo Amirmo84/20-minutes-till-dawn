@@ -1,3 +1,4 @@
+BackGround/mainMenubackgroundImage.png
 Images/Sprite/AbbySpecial_0.png
 Images/Sprite/AbbySpecial_1.png
 Images/Sprite/AbbySpecial_2.png
@@ -1141,6 +1142,10 @@ Images/Texture2D/verticalslider.png
 Images/Texture2D/window on.png
 Images/Texture2D/window.png
 libgdx.png
+profiles/1.png
+profiles/2.png
+profiles/3.png
+profiles/4.png
 skin/font-export.fnt
 skin/font-subtitle-export.fnt
 skin/font-title-export.fnt
