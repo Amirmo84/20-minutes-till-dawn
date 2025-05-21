@@ -1,7 +1,6 @@
 package com.TillDawn;
 
-import com.TillDawn.Views.MainMenu;
-import com.TillDawn.Views.SignUpMenu;
+import com.TillDawn.Views.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -21,7 +20,7 @@ public class TillDawn extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        getTillDawn().setScreen(new MainMenu());
+        getTillDawn().setScreen(new ProfileMenu());
     }
 
     @Override

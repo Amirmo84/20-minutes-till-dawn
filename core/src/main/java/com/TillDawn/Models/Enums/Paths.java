@@ -2,7 +2,8 @@ package com.TillDawn.Models.Enums;
 
 public enum Paths {
     SKIN("skin/pixthulhu-ui.json"),
-    MAINMENUBACKIMAGE("BackGround/mainMenubackgroundImage.png")
+    MAINMENUBACKIMAGE("BackGround/mainMenubackgroundImage.png"),
+    AVATAR("profiles/")
     ;
 
     private final String path;

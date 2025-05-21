@@ -1,13 +1,19 @@
 package com.TillDawn.Models;
 
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 public class User {
     private String username;
     private String password;
+    private String answer;
+    private String avatarPath;
 
-    public User(String username, String password) {
+    public User(String username, String password, String answer, String avatarPath) {
         this.username = username;
         this.password = password;
+        this.answer = answer;
+        this.avatarPath = avatarPath;
     }
 
     public String getUsername() {
@@ -16,6 +22,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static User getUserByUserName(String username) {

@@ -1,38 +1,56 @@
 package com.TillDawn.Controllers;
 
 import com.TillDawn.Models.App;
+import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.Result;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
+import com.TillDawn.Views.LoginMenu;
 import com.TillDawn.Views.MainMenu;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+
+import java.util.Random;
 
 public class SignUpMenuController {
     private final TillDawn game = TillDawn.getTillDawn();
 
     private final Skin skin = GameAssetManager.getManager().getSkin();
 
+    private Image avatar;
+
     private final Label username = new Label("Username: ", skin);
     private final Label password = new Label("Password: ", skin);
     private Label menuTitle = new Label("Sign Up Menu", skin);
     private Label resultLabel = new Label("", skin);
+    private final Label avatarTitle = new Label("Your avatar: ", skin);
 
     private TextField registerField = new TextField("", skin);
     private TextField passwordField = new TextField("", skin);
+    private TextField security = new TextField("What is your favourite animal?", skin);
 
     private final TextButton registerButton = new TextButton("Sign Up", skin);
-    private final TextButton showOrHide = new TextButton("Show", skin);
+    private final TextButton backButton = new TextButton("Back", skin);
+    private final TextButton login = new TextButton("Already have an account?", skin);
 
     private Table table = new Table(skin);
 
+    private String avatarPath;
+
     public SignUpMenuController() {
         table.setFillParent(true);
+        table.center();
+        handleRandomAvatar();
+
+        resultLabel.setFontScale(1.5f);
         menuTitle.setFontScale(2);
-        menuTitle.setPosition((float) Gdx.graphics.getWidth() /2 - menuTitle.getWidth() / 2, 1000);
+        table.add(menuTitle);
         table.row().pad(10, 0, 10, 0);
         table.add(username);
         table.row().pad(10, 0, 10, 0);
@@ -41,19 +59,45 @@ public class SignUpMenuController {
         table.add(password);
         table.row().pad(10, 0, 10, 0);
         table.add(passwordField).width(400).height(80);
-        table.row().pad(20, 0, 10, 0);
+        table.row();
+        table.add(security).width(450);
+        table.row().pad(10, 0, 10, 0);
         table.add(resultLabel);
-        table.row().pad(20, 0, 10, 0);
-        table.add(registerButton);
-//        table.row().pad(20, 0, 10, 0);
-//        table.add(backButton).fillX().expandX().pad(0 , 800 , 0 , 800);
-
-
-        registerField.setWidth(100);
-        passwordField.setWidth(100);
+        table.row().pad(10, 0, 10, 0);
+        table.add(registerButton).height(100);
+        table.row();
+        table.add(backButton).height(100);
+        table.row();
+        table.add(login);
 
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
+    }
+
+    public void addAvatar(Stage stage){
+        stage.addActor(avatarTitle);
+        stage.addActor(avatar);
+        avatarTitle.setPosition((float) Gdx.graphics.getWidth() / 2 + 320, (float) Gdx.graphics.getHeight() / 2 + 10, Align.center);
+        avatar.setPosition((float) Gdx.graphics.getWidth() / 2 + 500, (float) Gdx.graphics.getHeight() / 2 + 10, Align.center);
+    }
+
+    private void handleRandomAvatar(){
+        String path = Paths.AVATAR.getPath();
+        Random random = new Random();
+        int index = random.nextInt(4) + 1;
+        avatarPath = String.format("%s%d.png", path, index);
+        avatar = new Image(new Texture(Gdx.files.internal(avatarPath)));
+    }
+
+    private void handleBack(){
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                handleRandomAvatar();
+                game.getScreen().dispose();
+                game.setScreen(new MainMenu());
+            }
+        });
     }
 
     private void handleSignUp(){
@@ -75,11 +119,12 @@ public class SignUpMenuController {
                     resultLabel.setText("Password is weak!");
                     return;
                 }
-                User user = new User(username, password);
+                User user = new User(username, password, security.getText(), avatarPath);
                 App.getApp().getUsers().add(user);
                 resultLabel.setText("");
                 passwordField.setText("");
                 registerField.setText("");
+                handleRandomAvatar();
                 //TODO goto another menu
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());
@@ -87,33 +132,27 @@ public class SignUpMenuController {
         });
     }
 
-    private void handleShow(){
-        showOrHide.addListener(new ClickListener(){
+    private void handleLogin(){
+        login.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (showOrHide.getText().toString().equals("Show")) {
-                    passwordField.setPasswordMode(false);
-                    showOrHide.setText("Hide");
-                }
-                else {
-                    passwordField.setPasswordMode(true);
-                    passwordField.setPasswordCharacter('*');
-                    showOrHide.setText("Show");
-                }
+                game.getScreen().dispose();
+                game.setScreen(new LoginMenu());
             }
         });
     }
 
     public void handleButtons(){
         handleSignUp();
-        handleShow();
+        handleBack();
+        handleLogin();
     }
 
     public Table getTable() {
         return table;
     }
 
-    private boolean isPasswordStrong(String password){
+    public boolean isPasswordStrong(String password){
         if (password.length() < 8)
             return false;
         boolean hasUpper = false;
