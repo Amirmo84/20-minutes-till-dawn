@@ -7,6 +7,7 @@ public class MusicManager {
     private Music currentMusic;
     private float volume = 1.0f;
     private boolean enabled = true;
+    private String path;
 
     public void play(Music music, boolean loop) {
         stop();
@@ -43,5 +44,13 @@ public class MusicManager {
             currentMusic.stop();
             currentMusic = null;
         }
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

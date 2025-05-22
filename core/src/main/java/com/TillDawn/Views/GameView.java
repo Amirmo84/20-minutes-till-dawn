@@ -1,10 +1,10 @@
 package com.TillDawn.Views;
 
-import com.TillDawn.Controllers.GameControllers.WeaponController;
+import com.TillDawn.Controllers.GameControllers.GameController;
 import com.TillDawn.Models.GameAssetManager;
-import com.TillDawn.Models.Weapon;
 import com.TillDawn.TillDawn;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,7 +14,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class GameView implements Screen, InputProcessor {
     private Stage stage;
     private TillDawn game = TillDawn.getTillDawn();
-    private WeaponController weaponController = new WeaponController(new Weapon());
+    private GameController controller;
+
+    public GameView(GameController controller) {
+        this.controller = controller;
+        controller.setView(this);
+    }
 
     @Override
     public void show() {
@@ -26,9 +31,10 @@ public class GameView implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
-        game.getBatch().setShader(game.getGrayscaleShader());
+        if (game.isGray())
+            game.getBatch().setShader(game.getGrayscaleShader());
         game.getBatch().begin();
-        weaponController.update();
+        controller.updateGame();
         game.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
@@ -76,12 +82,15 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        weaponController.handleWeaponShoot(screenX, screenY);
+        if (game.isControlDefault())
+            controller.getWeaponController().handleWeaponShoot(screenX, screenY);
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (!game.isControlDefault())
+            controller.getWeaponController().handleWeaponShoot(screenX, screenY);
         return false;
     }
 
@@ -97,7 +106,7 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        weaponController.handleWeaponRotation(screenX, screenY);
+        controller.getWeaponController().handleWeaponRotation(screenX, screenY);
         return false;
     }
 

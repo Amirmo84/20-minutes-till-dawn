@@ -1,5 +1,6 @@
 package com.TillDawn;
 
+import com.TillDawn.Controllers.GameControllers.GameController;
 import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.MusicManager;
@@ -38,7 +39,9 @@ public class TillDawn extends Game {
                 Gdx.files.internal( Paths.GRAYSCALE.getPath() + "default.vert"),
                 Gdx.files.internal(Paths.GRAYSCALE.getPath() + "greyScale.frag")
         );
-        getTillDawn().setScreen(new SettingsView());
+
+        getTillDawn().setScreen(new GameView(new GameController()));
+        musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
     }
 

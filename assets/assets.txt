@@ -84,6 +84,7 @@ AudioClip/sfx_lowhealth_alarmloop1.wav
 AudioClip/sfx_sounds_impact1.wav
 AudioClip/single_shot.wav
 BackGround/SettingsMenu.png
+BackGround/background.png
 BackGround/mainMenubackgroundImage.png
 Font/ChevyRay - Lantern.ttf
 Font/LiberationSans.ttf
@@ -95,6 +96,12 @@ Font/NotoSansSC-Regular.otf
 Font/OpenSans.ttf
 GrayScale/default.vert
 GrayScale/greyScale.frag
+Hero/Idle_0.png
+Hero/Idle_1.png
+Hero/Idle_2.png
+Hero/Idle_3.png
+Hero/Idle_4.png
+Hero/Idle_5.png
 Images/Sprite/AbbySpecial_0.png
 Images/Sprite/AbbySpecial_1.png
 Images/Sprite/AbbySpecial_2.png
@@ -1238,6 +1245,7 @@ Images/Texture2D/verticalslider.png
 Images/Texture2D/window on.png
 Images/Texture2D/window.png
 Songs/track1.mp3
+Songs/track2.mp3
 libgdx.png
 profiles/1.png
 profiles/2.png

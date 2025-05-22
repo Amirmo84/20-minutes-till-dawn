@@ -6,6 +6,7 @@ import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.ForgotPasswordView;
 import com.TillDawn.Views.MainMenu;
+import com.TillDawn.Views.SignUpMenu;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -23,9 +24,10 @@ public class LoginMenuController {
     private TextField registerField = new TextField("", skin);
     private TextField passwordField = new TextField("", skin);
 
-    private final TextButton loginButton = new TextButton("Sign Up", skin);
-    private final TextButton asGuestButton = new TextButton("Back", skin);
+    private final TextButton loginButton = new TextButton("Log in", skin);
+    private final TextButton asGuestButton = new TextButton("Enter as guest", skin);
     private final TextButton forgotPassword = new TextButton("Forgot password", skin);
+    private final TextButton back = new TextButton("Back", skin);
 
     private Table table = new Table(skin);
 
@@ -77,6 +79,8 @@ public class LoginMenuController {
         asGuestButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                registerField.setText("");
+                passwordField.setText("");
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());
             }
@@ -95,8 +99,22 @@ public class LoginMenuController {
                     return;
                 }
                 App.getApp().setTempUser(user);
+                registerField.setText("");
+                passwordField.setText("");
                 game.getScreen().dispose();
                 game.setScreen(new ForgotPasswordView());
+            }
+        });
+    }
+
+    private void handleBack(){
+        back.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                registerField.setText("");
+                passwordField.setText("");
+                game.getScreen().dispose();
+                game.setScreen(new SignUpMenu());
             }
         });
     }
@@ -105,6 +123,7 @@ public class LoginMenuController {
         handleLogin();
         handleAsGuest();
         handleForgot();
+        handleBack();
     }
 
     public Table getTable() {

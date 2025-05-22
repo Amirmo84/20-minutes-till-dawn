@@ -1,10 +1,12 @@
 package com.TillDawn.Controllers.MenuControllers;
 
+import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.MainMenu;
 import com.TillDawn.Views.SettingsView;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -19,12 +21,15 @@ public class SettingsController {
     private final Label menuTitle = new Label("Settings", skin);
     private final Label change = new Label("Change volume: ", skin);
     private Label resultLabel = new Label("", skin);
+    private Label musicLabel = new Label("", skin);
 
     private final TextButton back = new TextButton("Back", skin);
     private final TextButton muteSFX = new TextButton("Mute SFX", skin);
     private final TextButton changeControllers = new TextButton("Change controllers", skin);
     private final TextButton autoReload = new TextButton("Toggle auto reload", skin);
     private final TextButton greyScale = new TextButton("Toggle gray scale", skin);
+    private final TextButton music1 = new TextButton("Music 1", skin);
+    private final TextButton music2 = new TextButton("Music 2", skin);
 
     private Slider volumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
 
@@ -45,6 +50,11 @@ public class SettingsController {
         table.add(change).row();
         table.add(volumeSlider).width(400).row();
         table.row().padTop(30);
+        Table musicTable = new Table();
+        musicTable.add(music1).height(100).padRight(20);
+        musicTable.add(music2).height(100);
+        table.add(musicTable).row();
+        table.add(musicLabel).row();
         table.add(muteSFX).height(100).row();
         table.add(changeControllers).height(100).row();
         table.add(resultLabel).row();
@@ -138,8 +148,43 @@ public class SettingsController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 resultLabel.setText("");
+                musicLabel.setText("");
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());
+            }
+        });
+    }
+
+    private void handleMusic1(){
+        music1.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Music music = Gdx.audio.newMusic(Gdx.files.internal(Paths.MAINSONG.getPath()));
+                if (!game.getMusicManager().getPath().equals(Paths.MAINSONG.getPath())){
+                    game.getMusicManager().play(music, true);
+                    musicLabel.setText("Music 1 is now playing!");
+                    game.getMusicManager().setPath(Paths.MAINSONG.getPath());
+                }else
+                    musicLabel.setText("Music 1 is already playing!");
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
+            }
+        });
+    }
+
+    private void handleMusic2(){
+        music2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Music music = Gdx.audio.newMusic(Gdx.files.internal(Paths.SONG2.getPath()));
+                if (!game.getMusicManager().getPath().equals(Paths.SONG2.getPath())){
+                    game.getMusicManager().play(music, true);
+                    musicLabel.setText("Music 2 is now playing!");
+                    game.getMusicManager().setPath(Paths.SONG2.getPath());
+                } else
+                    musicLabel.setText("Music 2 is already playing!");
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -151,6 +196,8 @@ public class SettingsController {
         handleControllers();
         handleReload();
         handleGreyScale();
+        handleMusic1();
+        handleMusic2();
     }
 
     public Table getTable() {

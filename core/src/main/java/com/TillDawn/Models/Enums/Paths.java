@@ -10,7 +10,9 @@ public enum Paths {
     MAINSONG("Songs/track1.mp3"),
     GRAYSCALE("GrayScale/"),
     SETTINGSBACKGROUND("BackGround/SettingsMenu.png"),
-    FONT("Font/MyFont.ttf")
+    SONG2("Songs/track2.mp3"),
+    GAMEBACKGROUND("BackGround/background.png"),
+    IDLE0("Hero/")
     ;
 
     private final String path;
