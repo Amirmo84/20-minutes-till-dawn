@@ -83,6 +83,7 @@ AudioClip/deadly_lazar_shot_24.wav
 AudioClip/sfx_lowhealth_alarmloop1.wav
 AudioClip/sfx_sounds_impact1.wav
 AudioClip/single_shot.wav
+BackGround/SettingsMenu.png
 BackGround/mainMenubackgroundImage.png
 Font/ChevyRay - Express.ttf
 Font/ChevyRay - Lantern.ttf
@@ -92,6 +93,8 @@ Font/NotoSansJP-Regular.otf
 Font/NotoSansKR-Regular.otf
 Font/NotoSansSC-Regular.otf
 Font/OpenSans.ttf
+GrayScale/default.vert
+GrayScale/greyScale.frag
 Images/Sprite/AbbySpecial_0.png
 Images/Sprite/AbbySpecial_1.png
 Images/Sprite/AbbySpecial_2.png
@@ -1234,6 +1237,7 @@ Images/Texture2D/vertical scrollbar.png
 Images/Texture2D/verticalslider.png
 Images/Texture2D/window on.png
 Images/Texture2D/window.png
+Songs/track1.mp3
 libgdx.png
 profiles/1.png
 profiles/2.png

@@ -6,7 +6,10 @@ public enum Paths {
     AVATAR("profiles/"),
     BULLET("Images/Sprite/Icon_Bullet_Storm.png"),
     WEAPON("Images/Sprite/SMGStill.png"),
-    CURSOR("Images/Sprite/T_CursorSprite.png")
+    CURSOR("Images/Sprite/T_CursorSprite.png"),
+    MAINSONG("Songs/track1.mp3"),
+    GRAYSCALE("GrayScale/"),
+    SETTINGSBACKGROUND("BackGround/SettingsMenu.png")
     ;
 
     private final String path;

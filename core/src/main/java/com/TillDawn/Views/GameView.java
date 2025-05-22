@@ -26,6 +26,7 @@ public class GameView implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
+        game.getBatch().setShader(game.getGrayscaleShader());
         game.getBatch().begin();
         weaponController.update();
         game.getBatch().end();

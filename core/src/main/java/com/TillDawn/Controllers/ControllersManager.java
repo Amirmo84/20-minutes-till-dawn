@@ -1,5 +1,7 @@
 package com.TillDawn.Controllers;
 
+import com.TillDawn.Controllers.MenuControllers.*;
+
 public class ControllersManager {
     public static SignUpMenuController signUpMenuController = new SignUpMenuController();
 
@@ -10,4 +12,6 @@ public class ControllersManager {
     public static ForgotPasswordController forgotPasswordController = new ForgotPasswordController();
 
     public static ProfileMenuController profileMenuController = new ProfileMenuController();
+
+    public static SettingsController settingsController = new SettingsController();
 }
