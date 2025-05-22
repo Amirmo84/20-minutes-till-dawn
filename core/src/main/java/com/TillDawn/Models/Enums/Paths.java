@@ -9,7 +9,8 @@ public enum Paths {
     CURSOR("Images/Sprite/T_CursorSprite.png"),
     MAINSONG("Songs/track1.mp3"),
     GRAYSCALE("GrayScale/"),
-    SETTINGSBACKGROUND("BackGround/SettingsMenu.png")
+    SETTINGSBACKGROUND("BackGround/SettingsMenu.png"),
+    FONT("Font/MyFont.ttf")
     ;
 
     private final String path;

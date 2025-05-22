@@ -2,6 +2,7 @@ package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
+import com.TillDawn.Views.SettingsView;
 import com.TillDawn.Views.SignUpMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,12 +26,14 @@ public class MainMenuController {
     private final TextButton leaderboard = new TextButton("Leaderboard", skin);
     private final TextButton hint = new TextButton("Hint menu", skin);
     private final TextButton logout = new TextButton("Log out", skin);
+    private final TextButton exit = new TextButton("Exit", skin);
 
     public MainMenuController() {
         table.addActor(image);
         image.setPosition(0, 0);
         image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
+        table.center();
         handleFontScales();
         table.addActor(signIn);
         signIn.setPosition(10, (float) Gdx.graphics.getHeight() - signIn.getHeight() - 10);
@@ -46,6 +49,7 @@ public class MainMenuController {
         hint.setPosition(10, (float) Gdx.graphics.getHeight() - hint.getHeight() - 510);
         table.addActor(logout);
         logout.setPosition(10, 10);
+        table.add(exit);
     }
 
     private void handleFontScales(){
@@ -75,7 +79,28 @@ public class MainMenuController {
         });
     }
 
+    private void handleSettings(){
+        settings.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
+            }
+        });
+    }
+
+    private void handleExit(){
+        exit.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+    }
+
     public void handleButtons(){
         handleSignInButton();
+        handleSettings();
+        handleExit();
     }
 }

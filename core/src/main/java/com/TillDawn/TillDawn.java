@@ -7,7 +7,6 @@ import com.TillDawn.Models.SFXManager;
 import com.TillDawn.Views.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
@@ -19,6 +18,8 @@ public class TillDawn extends Game {
     private SFXManager sfxManager = new SFXManager();
     private ShaderProgram grayscaleShader;
     private boolean isGray = false;
+    private boolean isControlDefault = true;
+    private boolean reloadAuto = false;
 
     private TillDawn() {}
 
@@ -31,6 +32,7 @@ public class TillDawn extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
+
         ShaderProgram.pedantic = false;
          grayscaleShader = new ShaderProgram(
                 Gdx.files.internal( Paths.GRAYSCALE.getPath() + "default.vert"),
@@ -72,5 +74,21 @@ public class TillDawn extends Game {
 
     public void setGray(boolean gray) {
         isGray = gray;
+    }
+
+    public boolean isControlDefault() {
+        return isControlDefault;
+    }
+
+    public void setControlDefault(boolean controlDefault) {
+        isControlDefault = controlDefault;
+    }
+
+    public boolean isReloadAuto() {
+        return reloadAuto;
+    }
+
+    public void setReloadAuto(boolean reloadAuto) {
+        this.reloadAuto = reloadAuto;
     }
 }

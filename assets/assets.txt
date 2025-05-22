@@ -85,9 +85,9 @@ AudioClip/sfx_sounds_impact1.wav
 AudioClip/single_shot.wav
 BackGround/SettingsMenu.png
 BackGround/mainMenubackgroundImage.png
-Font/ChevyRay - Express.ttf
 Font/ChevyRay - Lantern.ttf
 Font/LiberationSans.ttf
+Font/MyFont.ttf
 Font/NotoSans-Regular.ttf
 Font/NotoSansJP-Regular.otf
 Font/NotoSansKR-Regular.otf

@@ -18,6 +18,7 @@ public class SettingsController {
 
     private final Label menuTitle = new Label("Settings", skin);
     private final Label change = new Label("Change volume: ", skin);
+    private Label resultLabel = new Label("", skin);
 
     private final TextButton back = new TextButton("Back", skin);
     private final TextButton muteSFX = new TextButton("Mute SFX", skin);
@@ -46,6 +47,7 @@ public class SettingsController {
         table.row().padTop(30);
         table.add(muteSFX).height(100).row();
         table.add(changeControllers).height(100).row();
+        table.add(resultLabel).row();
         table.add(autoReload).height(100).row();
         table.add(greyScale).height(100).row();
         table.add(back).height(100);
@@ -82,7 +84,15 @@ public class SettingsController {
         changeControllers.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                if (game.isControlDefault()){
+                    game.setControlDefault(false);
+                    resultLabel.setText("You can now shoot using M!");
+                } else {
+                    game.setControlDefault(true);
+                    resultLabel.setText("You can now shoot using touch down!");
+                }
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -91,7 +101,17 @@ public class SettingsController {
         autoReload.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                //TODO handle it properly
 
+                if (!game.isReloadAuto()){
+                    game.setReloadAuto(true);
+                    autoReload.setText("Untoggle auto reload");
+                } else {
+                    game.setReloadAuto(false);
+                    autoReload.setText("Toggle auto reload");
+                }
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -117,6 +137,7 @@ public class SettingsController {
         back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                resultLabel.setText("");
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());
             }
