@@ -3,6 +3,7 @@ package com.TillDawn;
 import com.TillDawn.Controllers.GameControllers.GameController;
 import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
+import com.TillDawn.Models.KeyManagment;
 import com.TillDawn.Models.MusicManager;
 import com.TillDawn.Models.SFXManager;
 import com.TillDawn.Views.*;
@@ -21,6 +22,8 @@ public class TillDawn extends Game {
     private boolean isGray = false;
     private boolean isControlDefault = true;
     private boolean reloadAuto = false;
+    private float gameLength = 20f;
+    private KeyManagment keyManagment = new KeyManagment();
 
     private TillDawn() {}
 
@@ -40,7 +43,8 @@ public class TillDawn extends Game {
                 Gdx.files.internal(Paths.GRAYSCALE.getPath() + "greyScale.frag")
         );
 
-        getTillDawn().setScreen(new GameView(new GameController()));
+//        getTillDawn().setScreen(new GameView(new GameController()));
+        getTillDawn().setScreen(new PreGameMenu());
         musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
     }
@@ -93,5 +97,17 @@ public class TillDawn extends Game {
 
     public void setReloadAuto(boolean reloadAuto) {
         this.reloadAuto = reloadAuto;
+    }
+
+    public float getGameLength() {
+        return gameLength;
+    }
+
+    public void setGameLength(float gameLength) {
+        this.gameLength = gameLength;
+    }
+
+    public KeyManagment getKeyManagment() {
+        return keyManagment;
     }
 }

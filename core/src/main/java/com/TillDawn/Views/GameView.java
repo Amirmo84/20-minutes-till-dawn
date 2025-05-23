@@ -4,17 +4,22 @@ import com.TillDawn.Controllers.GameControllers.GameController;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class GameView implements Screen, InputProcessor {
     private Stage stage;
     private TillDawn game = TillDawn.getTillDawn();
     private GameController controller;
+    private OrthographicCamera camera;
+    private FitViewport viewport;
 
     public GameView(GameController controller) {
         this.controller = controller;
@@ -23,9 +28,13 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        this.stage = new Stage(new ScreenViewport());
         Gdx.graphics.setCursor(GameAssetManager.getManager().getNewCursor());
         Gdx.input.setInputProcessor(this);
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+        camera.update();
+        this.stage = new Stage(viewport);
     }
 
     @Override
@@ -33,7 +42,27 @@ public class GameView implements Screen, InputProcessor {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
         if (game.isGray())
             game.getBatch().setShader(game.getGrayscaleShader());
+
+        float playerX = controller.getPlayerController().getPlayer().getPosX();
+        float playerY = controller.getPlayerController().getPlayer().getPosY();
+
+// 2. Clamp camera to not go outside background (optional, if background size is known)
+        float halfWidth = camera.viewportWidth / 2;
+        float halfHeight = camera.viewportHeight / 2;
+        int bgWidth = controller.getWorldController().getBackgroundTexture().getWidth();
+        int bgHeight = controller.getWorldController().getBackgroundTexture().getHeight();
+
+        camera.position.set(
+                MathUtils.clamp(playerX, halfWidth, bgWidth - halfWidth),
+                MathUtils.clamp(playerY, halfHeight, bgHeight - halfHeight),
+                0
+        );
+
+// 3. Update and set camera
+        camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
         game.getBatch().begin();
+        controller.getWeaponController().getWeapon().getSprite().setPosition(playerX, playerY);
         controller.updateGame();
         game.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
@@ -42,7 +71,7 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
     }
 
     @Override
@@ -62,6 +91,7 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
         this.stage.dispose();
     }
 
@@ -113,5 +143,9 @@ public class GameView implements Screen, InputProcessor {
     @Override
     public boolean scrolled(float amountX, float amountY) {
         return false;
+    }
+
+    public GameController getController() {
+        return controller;
     }
 }

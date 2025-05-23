@@ -6,6 +6,7 @@ import com.TillDawn.TillDawn;
 import com.TillDawn.Views.MainMenu;
 import com.TillDawn.Views.SettingsView;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,7 +26,9 @@ public class SettingsController {
 
     private final TextButton back = new TextButton("Back", skin);
     private final TextButton muteSFX = new TextButton("Mute SFX", skin);
-    private final TextButton changeControllers = new TextButton("Change controllers", skin);
+    private final TextButton changeControllers = new TextButton("Change shooting", skin);
+    private final TextButton changeReload = new TextButton("Change reload", skin);
+    private final TextButton changeAutoAim = new TextButton("Change auto aim", skin);
     private final TextButton autoReload = new TextButton("Toggle auto reload", skin);
     private final TextButton greyScale = new TextButton("Toggle gray scale", skin);
     private final TextButton music1 = new TextButton("Music 1", skin);
@@ -56,7 +59,14 @@ public class SettingsController {
         table.add(musicTable).row();
         table.add(musicLabel).row();
         table.add(muteSFX).height(100).row();
-        table.add(changeControllers).height(100).row();
+        Table subTable = new Table();
+        changeControllers.getLabel().setFontScale(0.8f);
+        changeAutoAim.getLabel().setFontScale(0.8f);
+        changeReload.getLabel().setFontScale(0.8f);
+        subTable.add(changeControllers).height(100).padRight(20);
+        subTable.add(changeReload).height(100).padRight(20);
+        subTable.add(changeAutoAim).height(100);
+        table.add(subTable).row();
         table.add(resultLabel).row();
         table.add(autoReload).height(100).row();
         table.add(greyScale).height(100).row();
@@ -189,6 +199,42 @@ public class SettingsController {
         });
     }
 
+    private void handleChangeReload(){
+        changeReload.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (game.isReloadAuto()) {
+                    if (game.getKeyManagment().getReloadButton() == Input.Keys.R) {
+                        resultLabel.setText("You can now reload with m");
+                        game.getKeyManagment().setReloadButton(Input.Keys.M);
+                    } else {
+                        resultLabel.setText("You can now reload with r");
+                        game.getKeyManagment().setReloadButton(Input.Keys.R);
+                    }
+                    game.getScreen().dispose();
+                    game.setScreen(new SettingsView());
+                }
+            }
+        });
+    }
+
+    private void handleChangeAutoAim(){
+        changeAutoAim.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (game.getKeyManagment().getReloadButton() == Input.Keys.SPACE){
+                    resultLabel.setText("You can now reload with p");
+                    game.getKeyManagment().setReloadButton(Input.Keys.P);
+                } else {
+                    resultLabel.setText("You can now reload with space");
+                    game.getKeyManagment().setReloadButton(Input.Keys.SPACE);
+                }
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
+            }
+        });
+    }
+
     public void handleButtons(){
         handleSlider();
         handleMute();
@@ -198,6 +244,8 @@ public class SettingsController {
         handleGreyScale();
         handleMusic1();
         handleMusic2();
+        handleChangeAutoAim();
+        handleChangeReload();
     }
 
     public Table getTable() {

@@ -4,9 +4,7 @@ import com.TillDawn.Models.App;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
-import com.TillDawn.Views.ForgotPasswordView;
-import com.TillDawn.Views.MainMenu;
-import com.TillDawn.Views.SignUpMenu;
+import com.TillDawn.Views.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -70,7 +68,7 @@ public class LoginMenuController {
                 registerField.setText("");
                 passwordField.setText("");
                 game.getScreen().dispose();
-                game.setScreen(new MainMenu());
+                game.setScreen(new ProfileMenu());
             }
         });
     }
@@ -82,7 +80,7 @@ public class LoginMenuController {
                 registerField.setText("");
                 passwordField.setText("");
                 game.getScreen().dispose();
-                game.setScreen(new MainMenu());
+                game.setScreen(new PreGameMenu());
             }
         });
     }

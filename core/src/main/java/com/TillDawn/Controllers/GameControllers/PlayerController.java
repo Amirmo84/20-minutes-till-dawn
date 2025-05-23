@@ -3,12 +3,16 @@ package com.TillDawn.Controllers.GameControllers;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.Player;
 import com.TillDawn.TillDawn;
+import com.TillDawn.Views.GameView;
+import com.TillDawn.Views.MainMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.MathUtils;
 
 public class PlayerController {
+    private TillDawn game = TillDawn.getTillDawn();
     private Player player;
 
     public PlayerController(Player player) {
@@ -16,6 +20,7 @@ public class PlayerController {
     }
 
     public void update(){
+        player.getPlayerSprite().setPosition(player.getPosX(), player.getPosY());
         player.getPlayerSprite().draw(TillDawn.getTillDawn().getBatch());
 
         if(player.isPlayerIdle()){
@@ -39,8 +44,10 @@ public class PlayerController {
             player.setPosX(player.getPosX() + player.getSpeed());
             player.getPlayerSprite().flip(true, false);
         }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
+            game.getScreen().dispose();
+            game.setScreen(new MainMenu());
         }
     }
 

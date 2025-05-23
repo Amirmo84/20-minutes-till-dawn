@@ -15,6 +15,7 @@ public class WeaponController {
 
     private Weapon weapon;
     private ArrayList<Bullet> bullets = new ArrayList<>();
+//    private PlayerController
 
     public WeaponController(Weapon weapon) {
         this.weapon = weapon;
@@ -38,6 +39,7 @@ public class WeaponController {
 
     public void handleWeaponShoot(int x, int y){
         bullets.add(new Bullet(x, y));
+
     }
 
     public void updateBullets() {
@@ -51,5 +53,9 @@ public class WeaponController {
             b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
             b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
         }
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

@@ -2,6 +2,7 @@ package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
+import com.TillDawn.Views.PreGameMenu;
 import com.TillDawn.Views.SettingsView;
 import com.TillDawn.Views.SignUpMenu;
 import com.badlogic.gdx.Gdx;
@@ -98,9 +99,20 @@ public class MainMenuController {
         });
     }
 
+    private void handlePregame(){
+        preGameMenu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new PreGameMenu());
+            }
+        });
+    }
+
     public void handleButtons(){
         handleSignInButton();
         handleSettings();
         handleExit();
+        handlePregame();
     }
 }

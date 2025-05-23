@@ -1,6 +1,7 @@
 package com.TillDawn.Controllers.GameControllers;
 
 import com.TillDawn.Models.Player;
+import com.TillDawn.Models.User;
 import com.TillDawn.Models.Weapon;
 import com.TillDawn.Views.GameView;
 
@@ -13,9 +14,9 @@ public class GameController {
 
     public void setView(GameView view) {
         this.view = view;
-        playerController = new PlayerController(new Player());
+        playerController = new PlayerController(new Player(new User("", "", "", "")));
         worldController = new WorldController(playerController);
-        weaponController = new WeaponController(new Weapon());
+        weaponController = new WeaponController(new Weapon(30));
     }
 
     public void updateGame() {
@@ -32,5 +33,9 @@ public class GameController {
 
     public WeaponController getWeaponController() {
         return weaponController;
+    }
+
+    public WorldController getWorldController() {
+        return worldController;
     }
 }

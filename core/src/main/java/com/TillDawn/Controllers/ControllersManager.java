@@ -14,4 +14,6 @@ public class ControllersManager {
     public static ProfileMenuController profileMenuController = new ProfileMenuController();
 
     public static SettingsController settingsController = new SettingsController();
+
+    public static PreGameController preGameController = new PreGameController();
 }
