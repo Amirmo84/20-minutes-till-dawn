@@ -86,6 +86,8 @@ public class SignUpMenuController {
         int index = random.nextInt(4) + 1;
         avatarPath = String.format("%s%d.png", path, index);
         avatar = new Image(new Texture(Gdx.files.internal(avatarPath)));
+//        avatar = new Image(new Texture(Gdx.files.internal("Images/Sprite/T_Lilith_Portrait.png")));
+//        avatar.setSize(194, 197);
     }
 
     private void handleBack(){

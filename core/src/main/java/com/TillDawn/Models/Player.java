@@ -3,45 +3,64 @@ package com.TillDawn.Models;
 import com.TillDawn.Models.Enums.Heroes;
 import com.TillDawn.Models.Enums.Weapons;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
+
+import java.util.HashSet;
 
 public class Player {
-    private Texture playerTexture = GameAssetManager.getManager().getIdel0();
+    private TextureRegion playerTexture;
     private final User user;
-    private Sprite playerSprite = new Sprite(playerTexture);
-    private float posX = 0;
-    private float posY = 0;
-    private float playerHealth = 100;
-    private CollisionRect rect ;
-    private float time = 0;
-    private float speed = 5;
+    private Sprite playerSprite;
     private Heroes hero;
     private Weapons weapon;
-
-    public float getSpeed() {
-        return speed;
-    }
-
+    private GridPos gridPos;
+    private int currentAmmo;
+    private int level = 1; //TODO: enum it
+    private float hp;
+    private int xp;
+    private int kills = 0;
+    private float hurt = 0f;
+    private boolean isHurt = false;
+    private float hurtTime = 0f;
+    private boolean levelUp = false;
+    private float damageMp = 1f;
+    private int ammo;
+    private int projectileAddition = 0;
+    private int maxAmmoAddition = 0;
+    private float speedMp = 1f;
+    private float maxHp;
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
+    private HashSet<Integer> abilities = new HashSet<Integer>();
+    private Animation<TextureRegion> animation;
+    private Rectangle rectangle;
+    private boolean isReloading = false;
+    private float width;
+    private float height;
+    private float time;
 
     public Player(User user){
-        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
-        playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
         this.user = user;
-        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
     }
 
-    public Texture getPlayerTexture() {
+    public TextureRegion getPlayerTexture() {
         return playerTexture;
     }
 
-    public void setPlayerTexture(Texture playerTexture) {
+    public void setPlayerTexture(TextureRegion playerTexture) {
         this.playerTexture = playerTexture;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public Sprite getPlayerSprite() {
+        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
+        playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         return playerSprite;
     }
 
@@ -49,38 +68,149 @@ public class Player {
         this.playerSprite = playerSprite;
     }
 
-    public float getPosX() {
-        return posX;
+    public Heroes getHero() {
+        return hero;
     }
 
-    public void setPosX(float posX) {
-        this.posX = posX;
+    public void setHero(Heroes hero) {
+        this.hero = hero;
     }
 
-    public float getPosY() {
-        return posY;
+    public Weapons getWeapon() {
+        return weapon;
     }
 
-    public void setPosY(float posY) {
-        this.posY = posY;
+    public void setWeapon(Weapons weapon) {
+        this.weapon = weapon;
     }
 
-    public float getPlayerHealth() {
-        return playerHealth;
+    public GridPos getGridPos() {
+        return gridPos;
     }
 
-    public void setPlayerHealth(float playerHealth) {
-        this.playerHealth = playerHealth;
+    public void setGridPos(GridPos gridPos) {
+        this.gridPos = gridPos;
     }
 
-    public CollisionRect getRect() {
-        return rect;
+    public int getCurrentAmmo() {
+        return currentAmmo;
     }
 
-    public void setRect(CollisionRect rect) {
-        this.rect = rect;
+    public void setCurrentAmmo(int currentAmmo) {
+        this.currentAmmo = currentAmmo;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public float getHp() {
+        return hp;
+    }
+
+    public void setHp(float hp) {
+        if (hp < this.hp && isHurt) {
+            return;
+        }
+        isHurt = true;
+        this.hp = Math.clamp(hp, 0, maxHp);
+//        if(hp > maxHp){
+//            hp = maxHp;
+//        }
+//        System.out.println(this.hp);
+//        this.hp = Math.max(hp, 0);
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        if (xp > level * 20) {
+            user.getSfxManager().setSound(GameAssetManager.getManager().getLevelUp());
+            user.getSfxManager().play();
+            level++;
+            levelUp = true;
+            xp = xp - (level - 1) * 20;
+        }
+        this.xp = xp;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public float getHurt() {
+        return hurt;
+    }
+
+    public void setHurt(float hurt) {
+        this.hurt = hurt;
+    }
+
+    public boolean isHurt() {
+        return isHurt;
+    }
+
+    public void setHurt(boolean hurt) {
+        isHurt = hurt;
+    }
+
+    public boolean isLevelUp() {
+        return levelUp;
+    }
+
+    public void setLevelUp(boolean levelUp) {
+        this.levelUp = levelUp;
+    }
+
+    public float getDamageMp() {
+        return damageMp;
+    }
+
+    public void setDamageMp(float damageMp) {
+        this.damageMp = damageMp;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
+
+    public int getProjectileAddition() {
+        return projectileAddition;
+    }
+
+    public void setProjectileAddition(int projectileAddition) {
+        this.projectileAddition = projectileAddition;
+    }
+
+    public int getMaxAmmoAddition() {
+        return maxAmmoAddition;
+    }
+
+    public void setMaxAmmoAddition(int maxAmmoAddition) {
+        this.maxAmmoAddition = maxAmmoAddition;
+    }
+
+    public float getSpeed() {
+        return hero.getSpeed() * speedMp;
+    }
+
+    public void setSpeedMp(float speedMp) {
+        this.speedMp = speedMp;
+    }
 
     public boolean isPlayerIdle() {
         return isPlayerIdle;
@@ -98,6 +228,63 @@ public class Player {
         isPlayerRunning = playerRunning;
     }
 
+    public HashSet<Integer> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(HashSet<Integer> abilities) {
+        this.abilities = abilities;
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        //to avoid conflict we had to patterns something like singleton for animation and recangle
+        if (animation == null){
+            animation = GameAssetManager.getManager().getIdle_frames();
+            width = animation.getKeyFrame(0).getRegionWidth() * 3f;
+            height = animation.getKeyFrame(0).getRegionHeight() * 3f;
+        }
+        return animation;
+    }
+
+    public void setAnimation(Animation<TextureRegion> animation) {
+        this.animation = animation;
+    }
+
+    public Rectangle getRectangle() {
+        if (rectangle == null){
+            rectangle = new Rectangle(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, width, height);
+        }
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public boolean isReloading() {
+        return isReloading;
+    }
+
+    public void setReloading(boolean reloading) {
+        isReloading = reloading;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
     public float getTime() {
         return time;
     }
@@ -106,23 +293,19 @@ public class Player {
         this.time = time;
     }
 
-    public User getUser() {
-        return user;
+    public float getHurtTime() {
+        return hurtTime;
     }
 
-    public Heroes getHero() {
-        return hero;
+    public void setHurtTime(float hurtTime) {
+        this.hurtTime = hurtTime;
     }
 
-    public void setHero(Heroes hero) {
-        this.hero = hero;
+    public float getMaxHp(){
+        return maxHp;
     }
 
-    public Weapons getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapons weapon) {
-        this.weapon = weapon;
+    public void setMaxHp(float maxHp) {
+        this.maxHp = maxHp;
     }
 }

@@ -14,6 +14,7 @@ public class SettingsView implements Screen {
     public void show() {
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        ControllersManager.settingsController.handleBasedOnUser();
         stage.addActor(ControllersManager.settingsController.getTable());
     }
 
@@ -27,7 +28,7 @@ public class SettingsView implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

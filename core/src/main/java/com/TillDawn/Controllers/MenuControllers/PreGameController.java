@@ -1,15 +1,15 @@
 package com.TillDawn.Controllers.MenuControllers;
 
-import com.TillDawn.Controllers.GameControllers.GameController;
-import com.TillDawn.Models.App;
+import com.TillDawn.Models.*;
 import com.TillDawn.Models.Enums.Heroes;
 import com.TillDawn.Models.Enums.Weapons;
-import com.TillDawn.Models.Game;
-import com.TillDawn.Models.GameAssetManager;
-import com.TillDawn.Models.Player;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.GameView;
 import com.TillDawn.Views.MainMenu;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -78,33 +78,42 @@ public class PreGameController {
         });
     }
 
-    private void handleLength(){
-        gameLengthSelectBox.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.setGameLength((float) gameLengthSelectBox.getSelected());
-            }
-        });
-    }
-
     private void handlePlay(){
         play.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Game game1 = new Game();
+                App.getApp().setLoggedInUser(new User("", "", "", ""));
+//                App.getApp().getLoggedInUser().getKeyManagment().changeMovement();
                 Player player = new Player(App.getApp().getLoggedInUser());
                 player.setHero(Heroes.getHeroByName(heroChooser.getSelected()));
                 player.setWeapon(Weapons.getWeaponByName(weaponChooser.getSelected()));
+                player.setPlayerTexture(GameAssetManager.getManager().firstFrameOfChar(heroChooser.getSelected()));
+                Animation<TextureRegion> animation = GameAssetManager.getManager().getCharAnimation(heroChooser.getSelected());
+                player.setAnimation(animation);
+                player.setWidth(animation.getKeyFrame(0).getRegionWidth() * 3f);
+                player.setHeight(animation.getKeyFrame(0).getRegionHeight() * 3f);
+                player.setPlayerSprite(new Sprite(player.getPlayerTexture()));
+                player.setGridPos(new GridPos());
+                player.getGridPos().setX(Gdx.graphics.getWidth() / 2f);
+                player.getGridPos().setY(Gdx.graphics.getHeight() / 2f);
+                player.setMaxHp(player.getHero().getHp());
+                player.setHp(player.getHero().getHp());
+                player.setAmmo(Weapons.getWeaponByName(weaponChooser.getSelected()).getAmmoMax());
+                player.setXp(0);
+                game1.setPlayer(player);
+                game1.setPlayer(player);
+                game1.setMaxTime((float) gameLengthSelectBox.getSelected());
+                App.getApp().getLoggedInUser().setCurrentGame(game1);
 
                 game.getScreen().dispose();
-                game.setScreen(new GameView(new GameController()));
+                game.setScreen(new GameView());
             }
         });
     }
 
     public void handleButtons(){
         handleBack();
-        handleLength();
         handlePlay();
     }
 

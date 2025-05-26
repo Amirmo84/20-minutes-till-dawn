@@ -16,4 +16,6 @@ public class ControllersManager {
     public static SettingsController settingsController = new SettingsController();
 
     public static PreGameController preGameController = new PreGameController();
+
+    public static HintMenuController hintMenuController = new HintMenuController();
 }

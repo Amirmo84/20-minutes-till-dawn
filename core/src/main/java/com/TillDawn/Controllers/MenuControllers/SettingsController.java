@@ -1,7 +1,9 @@
 package com.TillDawn.Controllers.MenuControllers;
 
+import com.TillDawn.Models.App;
 import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
+import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.MainMenu;
 import com.TillDawn.Views.SettingsView;
@@ -23,10 +25,11 @@ public class SettingsController {
     private final Label change = new Label("Change volume: ", skin);
     private Label resultLabel = new Label("", skin);
     private Label musicLabel = new Label("", skin);
+    private Label musicVolume = new Label("", skin);
 
     private final TextButton back = new TextButton("Back", skin);
     private final TextButton muteSFX = new TextButton("Mute SFX", skin);
-    private final TextButton changeControllers = new TextButton("Change shooting", skin);
+    private final TextButton changeControllers = new TextButton("Change movement", skin);
     private final TextButton changeReload = new TextButton("Change reload", skin);
     private final TextButton changeAutoAim = new TextButton("Change auto aim", skin);
     private final TextButton autoReload = new TextButton("Toggle auto reload", skin);
@@ -37,6 +40,8 @@ public class SettingsController {
     private Slider volumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
 
     private Table table = new Table(skin);
+
+//    private User user = App.getApp().getLoggedInUser();
 
     public SettingsController() {
         table.addActor(image);
@@ -51,7 +56,8 @@ public class SettingsController {
         table.add(menuTitle).row();
         table.row().padTop(20);
         table.add(change).row();
-        table.add(volumeSlider).width(400).row();
+        table.add(volumeSlider).width(400);
+        table.add(musicVolume).row();
         table.row().padTop(30);
         Table musicTable = new Table();
         musicTable.add(music1).height(100).padRight(20);
@@ -79,6 +85,9 @@ public class SettingsController {
             public void changed(ChangeEvent event, Actor actor) {
                 float volume = volumeSlider.getValue();
                 game.getMusicManager().setVolume(volume);
+//                musicVolume.setText(String.format("%d%%", (int) volume * 100));
+//                game.getScreen().dispose();
+//                game.setScreen(new SettingsView());
             }
         });
     }
@@ -87,11 +96,12 @@ public class SettingsController {
         muteSFX.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                User user = App.getApp().getLoggedInUser();
                 if (muteSFX.getText().toString().equals("Mute SFX")){
-                    game.getSfxManager().setSfxEnabled(false);
+                    user.getSfxManager().setSfxEnabled(false);
                     muteSFX.setText("Unmute SFX");
                 } else {
-                    game.getSfxManager().setSfxEnabled(true);
+                    user.getSfxManager().setSfxEnabled(true);
                     muteSFX.setText("Mute SFX");
                 }
                 game.getScreen().dispose();
@@ -104,12 +114,15 @@ public class SettingsController {
         changeControllers.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.isControlDefault()){
-                    game.setControlDefault(false);
-                    resultLabel.setText("You can now shoot using M!");
+                User user = App.getApp().getLoggedInUser();
+                if (user.isControlDefault()){
+                    user.setControlDefault(false);
+                    resultLabel.setText("You can now move with arrows!");
+                    user.getKeyManagment().changeMovement();
                 } else {
-                    game.setControlDefault(true);
-                    resultLabel.setText("You can now shoot using touch down!");
+                    user.setControlDefault(true);
+                    resultLabel.setText("You can now move with w-a-s-d!");
+                    user.getKeyManagment().changeMovement();
                 }
                 game.getScreen().dispose();
                 game.setScreen(new SettingsView());
@@ -122,12 +135,12 @@ public class SettingsController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //TODO handle it properly
-
-                if (!game.isReloadAuto()){
-                    game.setReloadAuto(true);
+                User user = App.getApp().getLoggedInUser();
+                if (!user.isReloadAuto()){
+                    user.setReloadAuto(true);
                     autoReload.setText("Untoggle auto reload");
                 } else {
-                    game.setReloadAuto(false);
+                    user.setReloadAuto(false);
                     autoReload.setText("Toggle auto reload");
                 }
                 game.getScreen().dispose();
@@ -140,11 +153,12 @@ public class SettingsController {
         greyScale.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (!game.isGray()){
-                    game.setGray(true);
+                User user = App.getApp().getLoggedInUser();
+                if (!user.isGray()){
+                    user.setGray(true);
                     greyScale.setText("Untoggle grey scale");
                 } else {
-                    game.setGray(false);
+                    user.setGray(false);
                     greyScale.setText("Toggle grey scale");
                 }
                 game.getScreen().dispose();
@@ -203,17 +217,15 @@ public class SettingsController {
         changeReload.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.isReloadAuto()) {
-                    if (game.getKeyManagment().getReloadButton() == Input.Keys.R) {
-                        resultLabel.setText("You can now reload with m");
-                        game.getKeyManagment().setReloadButton(Input.Keys.M);
-                    } else {
-                        resultLabel.setText("You can now reload with r");
-                        game.getKeyManagment().setReloadButton(Input.Keys.R);
-                    }
-                    game.getScreen().dispose();
-                    game.setScreen(new SettingsView());
+                if (App.getApp().getLoggedInUser().getKeyManagment().getReloadButton() == Input.Keys.R) {
+                    resultLabel.setText("You can now reload with m");
+                    App.getApp().getLoggedInUser().getKeyManagment().setReloadButton(Input.Keys.M);
+                } else {
+                    resultLabel.setText("You can now reload with r");
+                    App.getApp().getLoggedInUser().getKeyManagment().setReloadButton(Input.Keys.R);
                 }
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -222,17 +234,37 @@ public class SettingsController {
         changeAutoAim.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.getKeyManagment().getReloadButton() == Input.Keys.SPACE){
-                    resultLabel.setText("You can now reload with p");
-                    game.getKeyManagment().setReloadButton(Input.Keys.P);
+                if (App.getApp().getLoggedInUser().getKeyManagment().getAutoAimButton() == Input.Keys.SPACE){
+                    resultLabel.setText("You can now auto aim with P!");
+                    App.getApp().getLoggedInUser().getKeyManagment().setAutoAimButton(Input.Keys.P);
                 } else {
-                    resultLabel.setText("You can now reload with space");
-                    game.getKeyManagment().setReloadButton(Input.Keys.SPACE);
+                    resultLabel.setText("You can now auto aim with space!");
+                    App.getApp().getLoggedInUser().getKeyManagment().setAutoAimButton(Input.Keys.SPACE);
                 }
                 game.getScreen().dispose();
                 game.setScreen(new SettingsView());
             }
         });
+    }
+
+    public void handleBasedOnUser(){
+//        musicVolume.setText(String.format("%d%%",(int) game.getMusicManager().getVolume() * 100));
+        User user = App.getApp().getLoggedInUser();
+        if (user.isGray()){
+            greyScale.setText("Untoggle grey scale");
+        } else {
+            greyScale.setText("Toggle grey scale");
+        }
+        if (user.getSfxManager().isSfxEnabled()){
+            muteSFX.setText("Mute SFX");
+        } else {
+            muteSFX.setText("Unute SFX");
+        }
+        if (user.isReloadAuto()){
+            autoReload.setText("Untoggle auto reload");
+        } else {
+            autoReload.setText("Toggle auto reload");
+        }
     }
 
     public void handleButtons(){
