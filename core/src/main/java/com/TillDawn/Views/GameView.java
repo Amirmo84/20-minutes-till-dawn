@@ -100,6 +100,44 @@ public class GameView implements Screen, InputProcessor {
         }
     }
 
+    class WinView implements Screen{
+        @Override
+        public void show() {
+            player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
+            player.getUser().getSfxManager().play();
+        }
+
+        @Override
+        public void render(float delta) {
+
+        }
+
+        @Override
+        public void resize(int width, int height) {
+
+        }
+
+        @Override
+        public void pause() {
+
+        }
+
+        @Override
+        public void resume() {
+
+        }
+
+        @Override
+        public void hide() {
+
+        }
+
+        @Override
+        public void dispose() {
+
+        }
+    }
+
     @Override
     public void render(float delta) {
 //        ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
@@ -108,7 +146,8 @@ public class GameView implements Screen, InputProcessor {
             return;
         }
         if (game.getTimeGone() >= game.getMaxTime()){
-            win();
+//            win();
+            tillDawn.setScreen(new WinView());
             return;
         }
         if (isPaused){
@@ -274,18 +313,18 @@ public class GameView implements Screen, InputProcessor {
         }
     }
 
-    private void renderReloadAnimation(float delta){
-        if (player.getAmmo() != player.getWeapon().getAmmoMax() && player.isReloading()){
-            TextureRegion currentFrame = GameAssetManager.getManager().getReloadAnimation().getKeyFrame(reloadStateTime, false);
-            reloadStateTime += delta;
-//            tillDawn.getBatch().draw(currentFrame, screenWidth / 2 + 15f, screenHeight / 2 + 10f);
-            tillDawn.getBatch().draw(currentFrame, screenWidth / 2 + 15f, screenHeight / 2 + 10f,
-                    0, 0,
-            25f, 25f,
-            1.5f, 1.5f,
-                    0);
-        }
-    }
+//    private void renderReloadAnimation(float delta){
+//        if (player.getAmmo() != player.getWeapon().getAmmoMax() && player.isReloading()){
+//            TextureRegion currentFrame = GameAssetManager.getManager().getReloadAnimation().getKeyFrame(reloadStateTime, false);
+//            reloadStateTime += delta;
+////            tillDawn.getBatch().draw(currentFrame, screenWidth / 2 + 15f, screenHeight / 2 + 10f);
+//            tillDawn.getBatch().draw(currentFrame, playerController.getWeaponController().getTexture()., screenHeight / 2 + 10f,
+//                    0, 0,
+//            25f, 25f,
+//            1.5f, 1.5f,
+//                    0);
+//        }
+//    }
 
     private void updateEyeBats(float delta) {
         int index = -1;
@@ -358,9 +397,6 @@ public class GameView implements Screen, InputProcessor {
             tillDawn.getBatch().draw(currentFrame, player.getGridPos().getX() + explosion.getX(),
                     player.getGridPos().getY() + explosion.getY(),
                     explosion.getWidth(), explosion.getHeight());
-//            if (explosion.getAnimation().isAnimationFinished(0.5f)){
-//                game.getExplosions().remove(explosion);
-//            }
         }
         Iterator<Explosion> iter = game.getExplosions().iterator();
         while (iter.hasNext()) {

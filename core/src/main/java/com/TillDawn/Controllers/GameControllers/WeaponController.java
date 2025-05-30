@@ -221,4 +221,8 @@ public class WeaponController {
     public void dispose() {
         texture.dispose();
     }
+
+    public Texture getTexture() {
+        return texture;
+    }
 }

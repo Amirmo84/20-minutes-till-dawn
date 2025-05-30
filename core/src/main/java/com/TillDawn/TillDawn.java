@@ -11,6 +11,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class TillDawn extends Game {
@@ -71,5 +74,15 @@ public class TillDawn extends Game {
 
     public ShaderProgram getLightShader() {
         return lightShader;
+    }
+
+    public void addClickSoundToButton(TextButton button, Runnable onClick) {
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAssetManager.getManager().getClickSound().play();
+                onClick.run();
+            }
+        });
     }
 }

@@ -2,10 +2,7 @@ package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
-import com.TillDawn.Views.HintMenuView;
-import com.TillDawn.Views.PreGameMenu;
-import com.TillDawn.Views.SettingsView;
-import com.TillDawn.Views.SignUpMenu;
+import com.TillDawn.Views.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -116,6 +113,16 @@ public class MainMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
                 game.setScreen(new HintMenuView());
+            }
+        });
+    }
+
+    private void handleLeaderBoard(){
+        leaderboard.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new LeaderBoardMenu());
             }
         });
     }

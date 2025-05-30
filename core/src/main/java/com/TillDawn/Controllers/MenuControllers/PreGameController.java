@@ -83,6 +83,7 @@ public class PreGameController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Game game1 = new Game();
+                GameAssetManager.getManager().getClickSound().play();
                 App.getApp().setLoggedInUser(new User("", "", "", ""));
 //                App.getApp().getLoggedInUser().getKeyManagment().changeMovement();
                 Player player = new Player(App.getApp().getLoggedInUser());
