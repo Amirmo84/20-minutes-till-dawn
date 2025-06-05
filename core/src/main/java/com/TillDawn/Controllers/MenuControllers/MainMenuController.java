@@ -1,5 +1,6 @@
 package com.TillDawn.Controllers.MenuControllers;
 
+import com.TillDawn.Models.App;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.*;
@@ -127,11 +128,27 @@ public class MainMenuController {
         });
     }
 
+    private void handleProfile(){
+        profile.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (!App.getApp().getLoggedInUser().getUsername().isEmpty()){
+                    game.getScreen().dispose();
+                    game.setScreen(new ProfileMenu());
+                }
+                game.getScreen().dispose();
+                game.setScreen(new ProfileMenu());
+            }
+        });
+    }
+
     public void handleButtons(){
         handleSignInButton();
         handleSettings();
         handleExit();
         handlePregame();
         handleHint();
+        handleLeaderBoard();
+        handleProfile();
     }
 }

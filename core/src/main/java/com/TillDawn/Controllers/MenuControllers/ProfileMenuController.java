@@ -5,7 +5,10 @@ import com.TillDawn.Models.App;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
+import com.TillDawn.Views.ChangeAvatarMenu;
 import com.TillDawn.Views.MainMenu;
+import com.TillDawn.Views.SignUpMenu;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -28,6 +31,8 @@ public class ProfileMenuController {
     private final Label changePassword = new Label("change password: ", skin);
     private final Label errorLabelUsername = new Label("", skin );
     private final Label errorLabelPassword = new Label("", skin );
+
+    private Image avatar;
 
     private Table table = new Table(skin);
     public ProfileMenuController() {
@@ -104,7 +109,7 @@ public class ProfileMenuController {
                 App.getApp().getUsers().remove(App.getApp().getLoggedInUser());
                 App.getApp().setLoggedInUser(null);
                 game.getScreen().dispose();
-                game.setScreen(new MainMenu());
+                game.setScreen(new SignUpMenu());
             }
         });
     }
@@ -113,7 +118,8 @@ public class ProfileMenuController {
         avatarButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //TODO
+                game.getScreen().dispose();
+                game.setScreen(new ChangeAvatarMenu());
             }
         });
     }
@@ -128,11 +134,22 @@ public class ProfileMenuController {
         });
     }
 
+    private void handleAvatar(){
+        avatarButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new ChangeAvatarMenu());
+            }
+        });
+    }
+
     public void handleButtons(){
         handleDelete();
         handlePassword();
         handleUsername();
         handleBack();
+        handleAvatar();
     }
 
     public Table getTable() {

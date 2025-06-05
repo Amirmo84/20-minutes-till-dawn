@@ -1,10 +1,7 @@
 package com.TillDawn;
 
+import com.TillDawn.Models.*;
 import com.TillDawn.Models.Enums.Paths;
-import com.TillDawn.Models.GameAssetManager;
-import com.TillDawn.Models.KeyManagment;
-import com.TillDawn.Models.MusicManager;
-import com.TillDawn.Models.SFXManager;
 import com.TillDawn.Views.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -45,7 +42,8 @@ public class TillDawn extends Game {
                  Gdx.files.internal(Paths.GRAYSCALE.getPath() + "f.glsl")
          );
 //        getTillDawn().setScreen(new GameView(new GameController()));
-        getTillDawn().setScreen(new PreGameMenu());
+        App.getApp().setLoggedInUser(new User("1", "", "", "profiles/2.png"));
+        getTillDawn().setScreen(new ChangeAvatarMenu());
         musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
     }

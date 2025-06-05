@@ -17,12 +17,15 @@ public class OppBullet {
 
     public OppBullet(float x, float y) {
         this.damage = .1f;
+        this.x = x;
+        this.y = y;
         texture = GameAssetManager.getManager().getOppBullet();
         sprite = new Sprite(texture);
         sprite.setSize(20, 20);
         sprite.setX(x);
         sprite.setY(y);
         rectangle = new Rectangle(x, y, 20, 20);
+
         direction = new Vector2(
                 Gdx.graphics.getWidth() / 2f - x,
                 Gdx.graphics.getHeight() / 2f - y

@@ -125,4 +125,18 @@ public class User {
     public void setMaxTimeLived(float maxTimeLived) {
         this.maxTimeLived = maxTimeLived;
     }
+
+    public String getFormattedTime() {
+        int minutes = (int)(this.maxTimeLived / 60);
+        int seconds = (int)(this.getMaxTimeLived() % 60);
+        return String.format("%02d:%02d", minutes, seconds);
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
 }
