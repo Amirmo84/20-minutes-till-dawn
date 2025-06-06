@@ -1,7 +1,9 @@
 package com.TillDawn.lwjgl3;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.TillDawn.TillDawn;
 
 /** Launches the desktop (LWJGL3) application. */
@@ -12,7 +14,25 @@ public class Lwjgl3Launcher {
     }
 
     private static Lwjgl3Application createApplication() {
-        return new Lwjgl3Application(TillDawn.getTillDawn(), getDefaultConfiguration()); //TODO static or not?
+        Lwjgl3ApplicationConfiguration config = getDefaultConfiguration();
+        
+        // Create the application instance first
+        TillDawn game = new TillDawn();
+        
+        // Add window listener for file drops
+        config.setWindowListener(new Lwjgl3WindowAdapter() {
+            @Override
+            public void filesDropped(String[] files) {
+                System.out.println("Files dropped: " + String.join(", ", files));
+                if (Gdx.app != null) {
+                    Gdx.app.postRunnable(() -> {
+                        game.handleFileDrops(files);
+                    });
+                }
+            }
+        });
+        
+        return new Lwjgl3Application(game, config);
     }
 
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {

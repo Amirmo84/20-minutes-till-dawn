@@ -36,15 +36,12 @@ public class App {
     }
 
     public void setLoggedInUser(User loggedInUser) {
-        // Clear remembered flag from previous user if exists
-        if (this.loggedInUser != null) {
+        // Only clear remembered flag if explicitly logging out
+        if (loggedInUser == null && this.loggedInUser != null) {
             this.loggedInUser.setRemembered(false);
         }
         
         this.loggedInUser = loggedInUser;
-//        if (loggedInUser != null) {
-//            loggedInUser.setRemembered(true);
-//        }
         saveUsers(); // Save whenever user changes
     }
 

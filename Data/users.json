@@ -1,22 +1,21 @@
 [
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest1749212873975",
-	"avatarPath": "profiles/1.png",
+	"username": "ali",
+	"password": "asdFer34@1",
+	"answer": "What is your favourite animal?",
+	"avatarPath": "custom_avatars/custom_1749215594989.png",
+	"score": 7.702252,
+	"kills": 1,
+	"maxTimeLived": 300,
 	"keyManagment": {},
 	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest1749212928686",
+	"username": "Guest17492139",
 	"avatarPath": "profiles/1.png",
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest17492129",
-	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 120,
 	"keyManagment": {},
 	"sfxManager": {}
 },
@@ -32,7 +31,7 @@
 {
 	"class": "com.TillDawn.Models.User",
 	"username": "bruh",
-		"password": "qwerW123$",
+	"password": "qwerW123$",
 	"answer": "What is your favourite animal?",
 	"avatarPath": "profiles/3.png",
 	"keyManagment": {},
@@ -40,10 +39,73 @@
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest17492139",
+	"username": "Guest1749212873975",
 	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 120,
 	"keyManagment": {},
 	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492129",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest1749212928686",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492143",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492145",
+	"avatarPath": "profiles/2.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492149",
+	"avatarPath": "profiles/2.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492150",
+	"avatarPath": "custom_avatars/custom_1749215051027.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492154",
+	"avatarPath": "custom_avatars/custom_1749215507384.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492158",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492160",
+	"avatarPath": "custom_avatars/custom_1749216117767.png",
+	"keyManagment": {},
+	"sfxManager": {},
+	"remembered": true
 }
 ]

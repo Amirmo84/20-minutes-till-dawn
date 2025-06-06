@@ -128,7 +128,7 @@ public class LeaderBoardMenu implements Screen {
             nameLabel.setColor(rowColor);
             scoreTable.add(nameLabel);
 
-            Label scoreLabel = new Label(String.valueOf(player.getScore()), skin);
+            Label scoreLabel = new Label(String.format("%.2f", player.getScore()), skin);
             scoreLabel.setColor(rowColor);
             scoreTable.add(scoreLabel);
 

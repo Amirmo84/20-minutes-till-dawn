@@ -1,5 +1,6 @@
 package com.TillDawn;
 
+import com.TillDawn.Controllers.ControllersManager;
 import com.TillDawn.Models.*;
 import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Views.*;
@@ -20,11 +21,11 @@ public class TillDawn extends Game {
     private ShaderProgram grayscaleShader;
     private ShaderProgram lightShader;
 
-    private TillDawn() {}
+    public TillDawn() {
+        tillDawn = this;
+    }
 
     public static TillDawn getTillDawn() {
-        if (tillDawn == null)
-            tillDawn = new TillDawn();
         return tillDawn;
     }
 
@@ -47,6 +48,9 @@ public class TillDawn extends Game {
         getTillDawn().setScreen(new MainMenu());
         musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
+
+//        ControllersManager.init();
+//        setScreen(new SignUpMenu());
     }
 
     @Override
@@ -83,5 +87,11 @@ public class TillDawn extends Game {
                 onClick.run();
             }
         });
+    }
+
+    public void handleFileDrops(String[] files) {
+        if (getScreen() instanceof ChangeAvatarMenu) {
+            ((ChangeAvatarMenu) getScreen()).handleFileDrops(files);
+        }
     }
 }
