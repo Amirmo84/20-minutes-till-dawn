@@ -1,77 +1,48 @@
 [
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
+	"username": "Guest1749212873975",
 	"avatarPath": "profiles/1.png",
-	"score": 307.11118,
-	"kills": 2,
-	"maxTimeLived": 300,
 	"keyManagment": {},
 	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "io",
+	"username": "Guest1749212928686",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492129",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Amir",
 	"password": "qweR123$",
 	"answer": "What is your favourite animal?",
 	"avatarPath": "profiles/4.png",
-	"maxTimeLived": 300,
 	"keyManagment": {},
 	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
+	"username": "bruh",
+		"password": "qwerW123$",
+	"answer": "What is your favourite animal?",
+	"avatarPath": "profiles/3.png",
 	"keyManagment": {},
 	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
+	"username": "Guest17492139",
 	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 185.10385,
-	"keyManagment": {},
-	"sfxManager": {}
-},
-{
-	"class": "com.TillDawn.Models.User",
-	"username": "Guest",
-	"avatarPath": "profiles/1.png",
-	"maxTimeLived": 300,
+	"maxTimeLived": 120,
 	"keyManagment": {},
 	"sfxManager": {}
 }

@@ -17,6 +17,7 @@ public class User {
     private float gameLength = 20f;
     private transient Game currentGame;
     private SFXManager sfxManager = new SFXManager();
+    private boolean remembered = false;
 
     // No-args constructor for JSON serialization
     public User() {
@@ -180,5 +181,13 @@ public class User {
         
         // Save the updated stats
         App.getApp().setLoggedInUser(this);
+    }
+
+    public boolean isRemembered() {
+        return remembered;
+    }
+
+    public void setRemembered(boolean remembered) {
+        this.remembered = remembered;
     }
 }

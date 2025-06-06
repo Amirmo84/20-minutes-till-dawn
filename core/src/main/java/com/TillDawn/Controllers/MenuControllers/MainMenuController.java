@@ -87,8 +87,8 @@ public class MainMenuController {
             table.addActor(userInfoTable);
             
             // Position user info down and left from the top-right corner
-            float userInfoX = Gdx.graphics.getWidth() - userInfoTable.getWidth() - 130;
-            float userInfoY = Gdx.graphics.getHeight() - userInfoTable.getHeight() - 150;
+            float userInfoX = Gdx.graphics.getWidth() - userInfoTable.getWidth() - 180;
+            float userInfoY = Gdx.graphics.getHeight() - userInfoTable.getHeight() - 200;
             
             userInfoTable.setPosition(userInfoX, userInfoY);
             

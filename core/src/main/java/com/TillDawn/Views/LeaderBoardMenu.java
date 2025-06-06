@@ -103,7 +103,7 @@ public class LeaderBoardMenu implements Screen {
         scoreTable.add(new Label("Username", skin)).width(200);
         scoreTable.add(new Label("Score", skin)).width(100);
         scoreTable.add(new Label("Kills", skin)).width(100);
-        scoreTable.add(new Label("Time Alive", skin)).width(120);
+        scoreTable.add(new Label("Max Time Alive", skin)).width(120);
         scoreTable.row();
 
         sortScores();

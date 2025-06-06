@@ -18,6 +18,7 @@ public class App {
         json = new Json();
         json.setOutputType(JsonWriter.OutputType.json);
         loadUsers();
+        loadRememberedUser();
     }
 
     public static App getApp() {
@@ -35,7 +36,15 @@ public class App {
     }
 
     public void setLoggedInUser(User loggedInUser) {
+        // Clear remembered flag from previous user if exists
+        if (this.loggedInUser != null) {
+            this.loggedInUser.setRemembered(false);
+        }
+        
         this.loggedInUser = loggedInUser;
+//        if (loggedInUser != null) {
+//            loggedInUser.setRemembered(true);
+//        }
         saveUsers(); // Save whenever user changes
     }
 
@@ -81,6 +90,23 @@ public class App {
             System.err.println("Error loading users: " + e.getMessage());
             e.printStackTrace();
             users = new ArrayList<>(); // Ensure we have an empty list if loading fails
+        }
+    }
+
+    private void loadRememberedUser() {
+        for (User user : users) {
+            if (user.isRemembered()) {
+                loggedInUser = user;
+                break;
+            }
+        }
+    }
+
+    public void logout() {
+        if (loggedInUser != null) {
+            loggedInUser.setRemembered(false);
+            saveUsers();
+            loggedInUser = null;
         }
     }
 }

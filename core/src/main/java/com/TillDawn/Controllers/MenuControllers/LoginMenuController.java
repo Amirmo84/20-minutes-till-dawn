@@ -30,6 +30,8 @@ public class LoginMenuController {
 
     private Table table = new Table(skin);
 
+    private CheckBox rememberMeCheckbox;
+
     public LoginMenuController() {
         table.setFillParent(true);
         table.center();
@@ -42,6 +44,7 @@ public class LoginMenuController {
         table.add(registerField).width(400).row();
         table.add(password).row();
         table.add(passwordField).width(400).row();
+        table.add(rememberMeCheckbox = new CheckBox("Remember Me", skin)).colspan(2).row();
         table.row().pad(10, 0 , 10, 0);
         table.add(resultLabel).row();
         table.row().pad(10, 0 , 10, 0);
@@ -63,8 +66,11 @@ public class LoginMenuController {
                     resultLabel.setText("Such username doesn't exist!");
                     return;
                 }
-                if (!user.getPassword().equals(password))
+                if (!user.getPassword().equals(password)) {
                     resultLabel.setText("Invalid password!");
+                    return;
+                }
+                user.setRemembered(!rememberMeCheckbox.isChecked());
                 App.getApp().setLoggedInUser(user);
                 registerField.setText("");
                 passwordField.setText("");
@@ -78,7 +84,8 @@ public class LoginMenuController {
         asGuestButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                User user = new User("Guest", "", "", Paths.AVATAR.getPath() + "1.png");
+                User user = new User(String.format("Guest%d", System.currentTimeMillis() / 100000), "", "", Paths.AVATAR.getPath() + "1.png");
+                user.setRemembered(false);
                 App.getApp().addUser(user);
                 App.getApp().setLoggedInUser(user);
                 registerField.setText("");
