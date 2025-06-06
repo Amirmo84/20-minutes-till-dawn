@@ -51,6 +51,7 @@ public class App {
 
     public void setTempUser(User tempUser) {
         this.tempUser = tempUser;
+        saveUsers();
     }
 
     public void addUser(User user) {

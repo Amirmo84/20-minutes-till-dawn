@@ -1,11 +1,12 @@
 package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.App;
+import com.TillDawn.Models.Enums.Language;
 import com.TillDawn.Models.GameAssetManager;
+import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,28 +17,49 @@ import com.badlogic.gdx.utils.Scaling;
 
 public class MainMenuController {
     private final TillDawn game = TillDawn.getTillDawn();
-
     private final Skin skin = GameAssetManager.getManager().getSkin();
     private final Image backgroundImage = GameAssetManager.getManager().getImage();
+    private Language currentLanguage;
     private Table table = new Table(skin);
 
-    private final TextButton signIn = new TextButton("Sign in", skin);
-    private final TextButton settings = new TextButton("Settings", skin);
-    private final TextButton profile = new TextButton("Profile menu", skin);
-    private final TextButton preGameMenu = new TextButton("Pre-game menu", skin);
-    private final TextButton leaderboard = new TextButton("Leaderboard", skin);
-    private final TextButton hint = new TextButton("Hint menu", skin);
-    private final TextButton logout = new TextButton("Log out", skin);
-    private final TextButton exit = new TextButton("Exit", skin);
-    private final TextButton resume = new TextButton("Resume saved game", skin);
+    // Buttons
+    private final TextButton signIn;
+    private final TextButton settings;
+    private final TextButton profile;
+    private final TextButton preGameMenu;
+    private final TextButton leaderboard;
+    private final TextButton hint;
+    private final TextButton logout;
+    private final TextButton exit;
+    private final TextButton resume;
 
     // User info components
-    private final Image userAvatar = new Image();
-    private final Label usernameLabel = new Label("Username: ", skin);
-    private final Label scoreLabel = new Label("Score: ", skin);
-    private final Table userInfoTable = new Table(skin);
+    private final Image userAvatar;
+    private final Label usernameLabel;
+    private final Label scoreLabel;
+    private final Table userInfoTable;
 
     public MainMenuController() {
+        User user = App.getApp().getLoggedInUser();
+        currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
+
+        // Initialize buttons with translations
+        signIn = new TextButton(currentLanguage.get("button.login"), skin);
+        settings = new TextButton(currentLanguage.get("button.settings"), skin);
+        profile = new TextButton(currentLanguage.get("button.profile"), skin);
+        preGameMenu = new TextButton(currentLanguage.get("menu.pregame"), skin);
+        leaderboard = new TextButton(currentLanguage.get("menu.leaderboard"), skin);
+        hint = new TextButton(currentLanguage.get("menu.hint"), skin);
+        logout = new TextButton(currentLanguage.get("button.logout"), skin);
+        exit = new TextButton(currentLanguage.get("button.exit"), skin);
+        resume = new TextButton(currentLanguage.get("button.resume"), skin);
+
+        // Initialize user info components
+        userAvatar = new Image();
+        usernameLabel = new Label(currentLanguage.get("label.username"), skin);
+        scoreLabel = new Label(currentLanguage.get("label.score"), skin);
+        userInfoTable = new Table(skin);
+
         setupUI();
     }
 
@@ -73,10 +95,8 @@ public class MainMenuController {
         resume.remove();
 
         // Check if user is logged in
-        boolean isLoggedIn = App.getApp().getLoggedInUser() != null && 
-                           !App.getApp().getLoggedInUser().getUsername().isEmpty();
-
-        System.out.println("Refreshing UI state. User logged in: " + isLoggedIn);
+        User user = App.getApp().getLoggedInUser();
+        boolean isLoggedIn = user != null && !user.getUsername().isEmpty();
 
         if (!isLoggedIn) {
             table.addActor(signIn);
@@ -95,6 +115,7 @@ public class MainMenuController {
             // Adjust menu buttons
             table.addActor(profile);
             profile.setPosition(10, (float) Gdx.graphics.getHeight() - profile.getHeight() - 10);
+            
             table.addActor(settings);
             settings.setPosition(10, (float) Gdx.graphics.getHeight() - settings.getHeight() - 110);
             
@@ -111,26 +132,25 @@ public class MainMenuController {
             logout.setPosition(10, 10);
         }
 
-        // Always show settings and exit
-//        table.addActor(settings);
-//        settings.setPosition(10, (float) Gdx.graphics.getHeight() - settings.getHeight() -
-//                           (isLoggedIn ? 410 : 110));
         table.add(exit).row();
-        if (isLoggedIn)
+        if (isLoggedIn && user.getCurrentGame() != null) {
             table.add(resume);
+        }
     }
 
     private void updateUserInfo() {
         userInfoTable.clear();
-        
+        User user = App.getApp().getLoggedInUser();
+        if (user == null) return;
+
         // Create a vertical layout
         Table infoLayout = new Table();
-        infoLayout.defaults().pad(5);  // Add some default padding
+        infoLayout.defaults().pad(5);
         
         // Update avatar
         try {
             Texture avatarTexture;
-            String avatarPath = App.getApp().getLoggedInUser().getAvatarPath();
+            String avatarPath = user.getAvatarPath();
             
             if (avatarPath.startsWith("profiles/")) {
                 avatarTexture = new Texture(Gdx.files.internal(avatarPath));
@@ -144,17 +164,18 @@ public class MainMenuController {
             userAvatar.setDrawable(skin.getDrawable("default-avatar"));
         }
 
-        usernameLabel.setText("Username: " + App.getApp().getLoggedInUser().getUsername());
-        scoreLabel.setText(String.format("Score: %.1f", App.getApp().getLoggedInUser().getScore()));
+        usernameLabel.setText(currentLanguage.get("label.username") + " " + user.getUsername());
+        scoreLabel.setText(currentLanguage.get("label.score") + " " + String.format("%.1f", user.getScore()));
+
         // Add components vertically with center alignment
-        infoLayout.add(userAvatar).size(150, 150).padBottom(5).row();  // Reduced size
+        infoLayout.add(userAvatar).size(150, 150).padBottom(5).row();
         infoLayout.add(usernameLabel).padBottom(2).center().row();
         infoLayout.add(scoreLabel).center();
 
         userInfoTable.add(infoLayout);
     }
 
-    private void handleFontScales(){
+    private void handleFontScales() {
         signIn.getLabel().setFontScale(0.8f);
         settings.getLabel().setFontScale(0.8f);
         profile.getLabel().setFontScale(0.8f);
@@ -174,11 +195,25 @@ public class MainMenuController {
     }
 
     public void refreshUI() {
+        User user = App.getApp().getLoggedInUser();
+        currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
+        
+        // Update button texts
+        signIn.setText(currentLanguage.get("button.login"));
+        settings.setText(currentLanguage.get("button.settings"));
+        profile.setText(currentLanguage.get("button.profile"));
+        preGameMenu.setText(currentLanguage.get("menu.pregame"));
+        leaderboard.setText(currentLanguage.get("menu.leaderboard"));
+        hint.setText(currentLanguage.get("menu.hint"));
+        logout.setText(currentLanguage.get("button.logout"));
+        exit.setText(currentLanguage.get("button.exit"));
+        resume.setText(currentLanguage.get("button.resume"));
+        
         refreshUIState();
     }
 
-    private void handleSignInButton(){
-        signIn.addListener(new ClickListener(){
+    private void handleSignInButton() {
+        signIn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
@@ -187,8 +222,8 @@ public class MainMenuController {
         });
     }
 
-    private void handleSettings(){
-        settings.addListener(new ClickListener(){
+    private void handleSettings() {
+        settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
@@ -197,8 +232,8 @@ public class MainMenuController {
         });
     }
 
-    private void handleExit(){
-        exit.addListener(new ClickListener(){
+    private void handleExit() {
+        exit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
@@ -206,8 +241,8 @@ public class MainMenuController {
         });
     }
 
-    private void handlePregame(){
-        preGameMenu.addListener(new ClickListener(){
+    private void handlePregame() {
+        preGameMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
@@ -216,20 +251,18 @@ public class MainMenuController {
         });
     }
 
-    private void handleHint(){
-        hint.addListener(new ClickListener(){
+    private void handleHint() {
+        hint.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println(App.getApp().getLoggedInUser().getAvatarPath());
-                System.out.println(App.getApp().getLoggedInUser().getUsername());
                 game.getScreen().dispose();
                 game.setScreen(new HintMenuView());
             }
         });
     }
 
-    private void handleLeaderBoard(){
-        leaderboard.addListener(new ClickListener(){
+    private void handleLeaderBoard() {
+        leaderboard.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
@@ -238,8 +271,8 @@ public class MainMenuController {
         });
     }
 
-    private void handleProfile(){
-        profile.addListener(new ClickListener(){
+    private void handleProfile() {
+        profile.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.getScreen().dispose();
@@ -249,7 +282,7 @@ public class MainMenuController {
     }
 
     private void handleLogout() {
-        logout.addListener(new ClickListener(){
+        logout.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 App.getApp().setLoggedInUser(null);
@@ -258,7 +291,7 @@ public class MainMenuController {
         });
     }
 
-    public void handleButtons(){
+    public void handleButtons() {
         handleSignInButton();
         handleSettings();
         handleExit();

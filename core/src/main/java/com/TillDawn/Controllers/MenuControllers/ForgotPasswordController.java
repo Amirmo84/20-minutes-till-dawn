@@ -74,6 +74,7 @@ public class ForgotPasswordController {
                 }
 
                 App.getApp().getTempUser().setPassword(newPassword.getText());
+                App.getApp().setTempUser(App.getApp().getTempUser());
                 resultLabel.setFontScale(1);
                 resultLabel.setText("Password changed successfully! Please enter back button to go to the login menu!");
             }

@@ -2,6 +2,7 @@ package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.App;
 import com.TillDawn.Models.Enums.Heroes;
+import com.TillDawn.Models.Enums.Language;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
@@ -20,16 +21,28 @@ public class HintMenuController {
     private Skin skin = GameAssetManager.getManager().getSkin();
     private Heroes selectedHero = Heroes.SHANA;
     private User user = App.getApp().getLoggedInUser();
-    private Label descriptionLabel = new Label(showHeroStats(selectedHero), skin);
-    private Label menuTitle=  new Label("Hint Menu", skin);
-
-    private SelectBox<String> heroSelect = new SelectBox<>(skin);
-
-    private TextButton backButton = new TextButton("Back", skin);
-
+    private Language currentLanguage;
+    private Label descriptionLabel;
+    private Label menuTitle;
+    private SelectBox<String> heroSelect;
+    private TextButton backButton;
     private Table table = new Table(skin);
 
     public HintMenuController() {
+        user = App.getApp().getLoggedInUser();
+        currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
+        
+        // Initialize UI components with translations
+        descriptionLabel = new Label(showHeroStats(selectedHero), skin);
+        menuTitle = new Label(currentLanguage.get("menu.hint"), skin);
+        heroSelect = new SelectBox<>(skin);
+        backButton = new TextButton(currentLanguage.get("button.back"), skin);
+        
+        setupUI();
+    }
+
+    private void setupUI() {
+        table.clear();
         table.setFillParent(true);
         table.center();
         table.pad(20);
@@ -59,7 +72,7 @@ public class HintMenuController {
         Table table = new Table();
         table.defaults().pad(5);
 
-        table.add(new Label("SELECT HERO", skin)).colspan(2).padBottom(10).row();
+        table.add(new Label(currentLanguage.get("hint.select_hero"), skin)).colspan(2).padBottom(10).row();
 
         heroSelect.setItems(Heroes.heroesNames());
         heroSelect.setSelected(Heroes.SHANA.getName());
@@ -74,19 +87,19 @@ public class HintMenuController {
         Table table = new Table();
         table.defaults().pad(5);
 
-        table.add(new Label("CONTROLS", skin)).colspan(2).padBottom(10).row();
+        table.add(new Label(currentLanguage.get("hint.controls"), skin)).colspan(2).padBottom(10).row();
 
         // Only add control rows if user is available
         if (user != null && user.getKeyManagement() != null) {
-            addControlRow(table, "UP", Input.Keys.toString(user.getKeyManagement().getUp()));
-            addControlRow(table, "DOWN", Input.Keys.toString(user.getKeyManagement().getDown()));
-            addControlRow(table, "LEFT", Input.Keys.toString(user.getKeyManagement().getLeft()));
-            addControlRow(table, "RIGHT", Input.Keys.toString(user.getKeyManagement().getRight()));
-            addControlRow(table, "AUTO AIM", Input.Keys.toString(user.getKeyManagement().getAutoAimButton()));
-            addControlRow(table, "RELOAD", Input.Keys.toString(user.getKeyManagement().getReloadButton()));
-            addControlRow(table, "SHOOT", "Left click");
+            addControlRow(table, currentLanguage.get("controls.up"), Input.Keys.toString(user.getKeyManagement().getUp()));
+            addControlRow(table, currentLanguage.get("controls.down"), Input.Keys.toString(user.getKeyManagement().getDown()));
+            addControlRow(table, currentLanguage.get("controls.left"), Input.Keys.toString(user.getKeyManagement().getLeft()));
+            addControlRow(table, currentLanguage.get("controls.right"), Input.Keys.toString(user.getKeyManagement().getRight()));
+            addControlRow(table, currentLanguage.get("controls.auto_aim"), Input.Keys.toString(user.getKeyManagement().getAutoAimButton()));
+            addControlRow(table, currentLanguage.get("controls.reload"), Input.Keys.toString(user.getKeyManagement().getReloadButton()));
+            addControlRow(table, currentLanguage.get("controls.shoot"), currentLanguage.get("controls.left_click"));
         } else {
-            addControlRow(table, "Please log in to view controls", "");
+            addControlRow(table, currentLanguage.get("hint.login_required"), "");
         }
 
         return table;
@@ -96,13 +109,13 @@ public class HintMenuController {
         Table table = new Table();
         table.defaults().pad(5);
 
-        table.add(new Label("CHEAT CODES", skin)).colspan(2).padBottom(10).row();
+        table.add(new Label(currentLanguage.get("hint.cheats"), skin)).colspan(2).padBottom(10).row();
 
-        addCheatRow(table, "Key 1", "Decrease time of the game by 1 minute");
-        addCheatRow(table, "Key 2", "Level up");
-        addCheatRow(table, "Key 3", "Increase HP");
-        addCheatRow(table, "Key 4", "Go to boss fight");
-        addCheatRow(table, "Key 5", "Increase ammo max");
+        addCheatRow(table, currentLanguage.get("cheats.key1"), currentLanguage.get("cheats.desc1"));
+        addCheatRow(table, currentLanguage.get("cheats.key2"), currentLanguage.get("cheats.desc2"));
+        addCheatRow(table, currentLanguage.get("cheats.key3"), currentLanguage.get("cheats.desc3"));
+        addCheatRow(table, currentLanguage.get("cheats.key4"), currentLanguage.get("cheats.desc4"));
+        addCheatRow(table, currentLanguage.get("cheats.key5"), currentLanguage.get("cheats.desc5"));
 
         return table;
     }
@@ -111,13 +124,13 @@ public class HintMenuController {
         Table table = new Table();
         table.defaults().pad(10);
 
-        table.add(new Label("ABILITIES", skin)).colspan(2).padBottom(5).row();
+        table.add(new Label(currentLanguage.get("hint.abilities"), skin)).colspan(2).padBottom(5).row();
 
-        table.add(new Label("Vitality : HP max + 1" , skin)).padRight(10);
-        table.add(new Label("Damager : Increase damage of the gun by *1.5f (temporary)", skin)).padBottom(2).row();
-        table.add(new Label("Procrease : Increase the projectile by 1", skin)).padRight(10);
-        table.add(new Label("Amocrease : Increase the ammo max by 5" , skin)).row();
-        addAbilityRow(table, "Speedy", "Increase the speed by *2 (temporary)");
+        table.add(new Label(currentLanguage.get("abilities.vitality"), skin)).padRight(10);
+        table.add(new Label(currentLanguage.get("abilities.damager"), skin)).padBottom(2).row();
+        table.add(new Label(currentLanguage.get("abilities.procrease"), skin)).padRight(10);
+        table.add(new Label(currentLanguage.get("abilities.amocrease"), skin)).row();
+        addAbilityRow(table, currentLanguage.get("abilities.speedy.name"), currentLanguage.get("abilities.speedy.desc"));
 
         return table;
     }
@@ -171,7 +184,10 @@ public class HintMenuController {
     }
 
     private String showHeroStats(Heroes hero){
-        return String.format("Name: %s      Hp: %d      Speed: %d", hero.getName(), hero.getHp(), hero.getSpeed());
+        return String.format(currentLanguage.get("hint.hero_stats"), 
+            hero.getName(), 
+            hero.getHp(), 
+            hero.getSpeed());
     }
 
     public Table getTable() {
@@ -180,12 +196,17 @@ public class HintMenuController {
 
     public void setUser(User user) {
         this.user = user;
-        // Rebuild the controls section with the new user
-        Table contentTable = (Table) table.findActor("contentTable");
-        if (contentTable != null) {
-            contentTable.clear();
-            contentTable.add(createControlsSection()).width(400).padRight(20);
-            contentTable.add(createCheatsSection()).width(400);
-        }
+        currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
+        refreshUI();
+    }
+
+    public void refreshUI() {
+        // Update all text elements with new language
+        menuTitle.setText(currentLanguage.get("menu.hint"));
+        backButton.setText(currentLanguage.get("button.back"));
+        descriptionLabel.setText(showHeroStats(selectedHero));
+        
+        // Rebuild the entire table with new translations
+        setupUI();
     }
 }

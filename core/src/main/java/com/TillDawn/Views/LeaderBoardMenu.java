@@ -1,6 +1,7 @@
 package com.TillDawn.Views;
 
 import com.TillDawn.Models.App;
+import com.TillDawn.Models.Enums.Language;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
@@ -27,9 +28,11 @@ public class LeaderBoardMenu implements Screen {
     private String currentSort = "score";
     private ArrayList<User> users;
     private User user;
+    private Language currentLanguage;
 
     public LeaderBoardMenu() {
         user = App.getApp().getLoggedInUser();
+        currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
         users = App.getApp().getUsers();
         setStage();
         createUI();
@@ -40,7 +43,7 @@ public class LeaderBoardMenu implements Screen {
         mainTable.setFillParent(true);
         mainTable.pad(20);
         stage.addActor(mainTable);
-        mainTable.add(new Label("SCOREBOARD", skin)).colspan(3).padBottom(20).row();
+        mainTable.add(new Label(currentLanguage.get("menu.leaderboard"), skin)).colspan(3).padBottom(20).row();
         mainTable.add(createSortSelector()).colspan(3).padBottom(20).row();
 
         scoreTable = new Table();
@@ -50,7 +53,7 @@ public class LeaderBoardMenu implements Screen {
         scrollPane.setScrollingDisabled(true, false);
         mainTable.add(scrollPane).colspan(3).grow().row();
 
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton backButton = new TextButton(currentLanguage.get("button.back"), skin);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -66,11 +69,16 @@ public class LeaderBoardMenu implements Screen {
         Table table = new Table();
         table.defaults().pad(5);
 
-        table.add(new Label("Sort by:", skin)).right().padRight(10);
+        table.add(new Label(currentLanguage.get("leaderboard.sort_by"), skin)).right().padRight(10);
 
         SelectBox<String> sortSelect = new SelectBox<>(skin);
-        sortSelect.setItems("Score", "Kills", "Time Alive", "Username");
-        sortSelect.setSelected("Score");
+        sortSelect.setItems(
+            currentLanguage.get("leaderboard.sort.score"),
+            currentLanguage.get("leaderboard.sort.kills"),
+            currentLanguage.get("leaderboard.sort.time"),
+            currentLanguage.get("leaderboard.sort.username")
+        );
+        sortSelect.setSelected(currentLanguage.get("leaderboard.sort.score"));
         sortSelect.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -99,11 +107,11 @@ public class LeaderBoardMenu implements Screen {
     private void refreshScores() {
         scoreTable.clear();
 
-        scoreTable.add(new Label("Rank", skin)).width(60);
-        scoreTable.add(new Label("Username", skin)).width(200);
-        scoreTable.add(new Label("Score", skin)).width(100);
-        scoreTable.add(new Label("Kills", skin)).width(100);
-        scoreTable.add(new Label("Max Time Alive", skin)).width(120);
+        scoreTable.add(new Label(currentLanguage.get("leaderboard.rank"), skin)).width(60);
+        scoreTable.add(new Label(currentLanguage.get("leaderboard.username"), skin)).width(200);
+        scoreTable.add(new Label(currentLanguage.get("leaderboard.score"), skin)).width(100);
+        scoreTable.add(new Label(currentLanguage.get("leaderboard.kills"), skin)).width(100);
+        scoreTable.add(new Label(currentLanguage.get("leaderboard.time_alive"), skin)).width(120);
         scoreTable.row();
 
         sortScores();
@@ -114,9 +122,9 @@ public class LeaderBoardMenu implements Screen {
             Color rowColor = Color.WHITE;
             if (i == 0) rowColor = Color.GOLD;
             else if (i == 1) rowColor = Color.GRAY;
-            else if (i == 2) rowColor =  new Color(0.8f, 0.5f, 0.2f, 1f);
+            else if (i == 2) rowColor = new Color(0.8f, 0.5f, 0.2f, 1f);
 
-            if(player.getUsername().equals(user.getUsername())){
+            if(player.getUsername().equals(user != null ? user.getUsername() : "")) {
                 rowColor = Color.BLUE;
             }
 

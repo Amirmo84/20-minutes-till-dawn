@@ -28,7 +28,9 @@ public enum Paths {
     ELDERBOSS("Images/Sprite/T_HasturBoss_"),
     WIN("AudioClip/YouWin.wav"),
     LOSE("AudioClip/YouLose.wav"),
-    LevelUp("AudioClip/Powerup.wav")
+    LevelUp("AudioClip/Powerup.wav"),
+    PregameBackground("BackGround/featured_com.Flanne.MinutesTillDawn.roguelike.shooting.gp_-1.jpg"),
+    OthersBackground("BackGround/20-minutes-till-dawn-huwun.png")
     ;
 
     private final String path;

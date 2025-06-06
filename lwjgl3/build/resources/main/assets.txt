@@ -5,8 +5,11 @@ AudioClip/UI Click 36.wav
 AudioClip/YouLose.wav
 AudioClip/YouWin.wav
 AudioClip/click.wav
+BackGround/20-minutes-till-dawn-cover.avif
+BackGround/20-minutes-till-dawn-huwun.png
 BackGround/SettingsMenu.png
 BackGround/background.png
+BackGround/featured_com.Flanne.MinutesTillDawn.roguelike.shooting.gp_-1.jpg
 BackGround/mainMenubackgroundImage.png
 Font/ChevyRay - Lantern.ttf
 Font/MyFont.ttf

@@ -45,6 +45,8 @@ public class GameAssetManager {
     private final Sound youWinSound = Gdx.audio.newSound(Gdx.files.internal(Paths.WIN.getPath()));
     private final Sound youLoseSound = Gdx.audio.newSound(Gdx.files.internal(Paths.LOSE.getPath()));
     private final Sound levelUp = Gdx.audio.newSound(Gdx.files.internal(Paths.LevelUp.getPath()));
+    private final Image pregameBackground = new Image(new Texture(Gdx.files.internal(Paths.PregameBackground.getPath())));
+    private final Image othersBackGround = new Image(new Texture(Gdx.files.internal(Paths.OthersBackground.getPath())));
 
     private GameAssetManager() {}
 
@@ -216,5 +218,13 @@ public class GameAssetManager {
 
     public Sound getLevelUp() {
         return levelUp;
+    }
+
+    public Image getPregameBackground() {
+        return pregameBackground;
+    }
+
+    public Image getOthersBackGround() {
+        return othersBackGround;
     }
 }

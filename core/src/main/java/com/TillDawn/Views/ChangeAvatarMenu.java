@@ -33,16 +33,22 @@ public class ChangeAvatarMenu implements Screen {
     private Image avatar;
     private SelectBox<String> selectAvatar = new SelectBox<>(skin);
 
+    private final Image image;
+
     public ChangeAvatarMenu() {
         user = App.getApp().getLoggedInUser();
         avatar = new Image();
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        image = GameAssetManager.getManager().getOthersBackGround();
         UI();
     }
 
     private void UI(){
         Table table = new Table(skin);
+        table.addActor(image);
+        image.setPosition(0, 0);
+        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
         stage.addActor(table);
 

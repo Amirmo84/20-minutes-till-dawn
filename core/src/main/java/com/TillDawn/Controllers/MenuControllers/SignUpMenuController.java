@@ -38,11 +38,17 @@ public class SignUpMenuController {
     private final TextButton backButton = new TextButton("Back", skin);
     private final TextButton login = new TextButton("Already have an account?", skin);
 
+    private final Image image;
+
     private Table table = new Table(skin);
 
     private String avatarPath;
 
     public SignUpMenuController() {
+        image = GameAssetManager.getManager().getOthersBackGround();
+        table.addActor(image);
+        image.setPosition(0, 0);
+        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
         table.center();
         handleRandomAvatar();

@@ -6,6 +6,7 @@ import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -28,11 +29,17 @@ public class LoginMenuController {
     private final TextButton forgotPassword = new TextButton("Forgot password", skin);
     private final TextButton back = new TextButton("Back", skin);
 
+    private final Image image;
+
     private Table table = new Table(skin);
 
     private CheckBox rememberMeCheckbox;
 
     public LoginMenuController() {
+        image = GameAssetManager.getManager().getOthersBackGround();
+        table.addActor(image);
+        image.setPosition(0, 0);
+        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
         table.center();
 

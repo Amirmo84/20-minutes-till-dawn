@@ -44,6 +44,7 @@ public class SettingsController {
 
     public SettingsController() {
         User user = App.getApp().getLoggedInUser();
+        Language currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
         
         // Initialize language selection
         languageSelect = new SelectBox<>(skin);
@@ -52,36 +53,36 @@ public class SettingsController {
             languages[i] = Language.values()[i].getDisplayName();
         }
         languageSelect.setItems(languages);
-        languageSelect.setSelected(user.getLanguage().getDisplayName());
+        languageSelect.setSelected(currentLanguage.getDisplayName());
 
         // Initialize all UI elements with translations
-        menuTitle = new Label(user.translate("menu.settings"), skin);
-        change = new Label(user.translate("settings.volume"), skin);
+        menuTitle = new Label(currentLanguage.get("menu.settings"), skin);
+        change = new Label(currentLanguage.get("settings.volume"), skin);
         resultLabel = new Label("", skin);
         musicLabel = new Label("", skin);
         musicVolume = new Label("", skin);
 
-        back = new TextButton(user.translate("button.back"), skin);
-        muteSFX = new TextButton(user.getSfxManager().isSfxEnabled() ? 
-            user.translate("settings.mute_sfx") : 
-            user.translate("settings.unmute_sfx"), skin);
-        changeControllers = new TextButton(user.translate("settings.controls"), skin);
-        changeReload = new TextButton(user.translate("button.change") + " " + user.translate("settings.reload"), skin);
-        changeAutoAim = new TextButton(user.translate("button.change") + " " + user.translate("settings.auto_aim"), skin);
-        autoReload = new TextButton(user.isReloadAuto() ? 
-            user.translate("settings.untoggle_auto_reload") : 
-            user.translate("settings.toggle_auto_reload"), skin);
-        greyScale = new TextButton(user.isGray() ? 
-            user.translate("settings.ungray_scale") : 
-            user.translate("settings.gray_scale"), skin);
-        music1 = new TextButton(user.translate("settings.music") + " 1", skin);
-        music2 = new TextButton(user.translate("settings.music") + " 2", skin);
+        back = new TextButton(currentLanguage.get("button.back"), skin);
+        muteSFX = new TextButton((user != null && user.getSfxManager().isSfxEnabled()) ? 
+            currentLanguage.get("settings.mute_sfx") : 
+            currentLanguage.get("settings.unmute_sfx"), skin);
+        changeControllers = new TextButton(currentLanguage.get("settings.controls"), skin);
+        changeReload = new TextButton(currentLanguage.get("button.change") + " " + currentLanguage.get("settings.reload"), skin);
+        changeAutoAim = new TextButton(currentLanguage.get("button.change") + " " + currentLanguage.get("settings.auto_aim"), skin);
+        autoReload = new TextButton((user != null && user.isReloadAuto()) ? 
+            currentLanguage.get("settings.untoggle_auto_reload") : 
+            currentLanguage.get("settings.toggle_auto_reload"), skin);
+        greyScale = new TextButton((user != null && user.isGray()) ? 
+            currentLanguage.get("settings.ungray_scale") : 
+            currentLanguage.get("settings.gray_scale"), skin);
+        music1 = new TextButton(currentLanguage.get("settings.music") + " 1", skin);
+        music2 = new TextButton(currentLanguage.get("settings.music") + " 2", skin);
 
         // Setup table layout
-        setupTableLayout();
+        setupTableLayout(currentLanguage);
     }
 
-    private void setupTableLayout() {
+    private void setupTableLayout(Language currentLanguage) {
         User user = App.getApp().getLoggedInUser();
         
         table.addActor(image);
@@ -96,14 +97,12 @@ public class SettingsController {
         table.add(menuTitle).row();
         
         // Language selection
-        Label label = new Label(user.translate("settings.language"), skin);
+        Label label = new Label(currentLanguage.get("settings.language"), skin);
         table.addActor(label);
         label.setPosition(80, (float) Gdx.graphics.getHeight() - 100);
-//        table.add(new Label(user.translate("settings.language"), skin)).padTop(20).row();
         table.addActor(languageSelect);
         languageSelect.setWidth(200);
         languageSelect.setPosition(35, (float) Gdx.graphics.getHeight() - 200);
-//        table.add(languageSelect).width(200).row();
         
         // Volume controls
         table.add(change).padTop(20).row();

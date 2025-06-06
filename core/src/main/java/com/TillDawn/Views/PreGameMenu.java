@@ -1,6 +1,7 @@
 package com.TillDawn.Views;
 
 import com.TillDawn.Controllers.ControllersManager;
+import com.TillDawn.Controllers.MenuControllers.PreGameController;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,12 +10,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PreGameMenu implements Screen {
     private Stage stage;
+    private PreGameController preGameController = new PreGameController();
 
     @Override
     public void show() {
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        stage.addActor(ControllersManager.preGameController.getTable());
+        stage.addActor(preGameController.getTable());
     }
 
     @Override
@@ -22,7 +24,7 @@ public class PreGameMenu implements Screen {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-        ControllersManager.preGameController.handleButtons();
+        preGameController.handleButtons();
     }
 
     @Override
