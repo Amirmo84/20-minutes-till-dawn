@@ -170,4 +170,26 @@ public class User {
         }
         return null;
     }
+
+    /**
+     * Updates the user's stats after a game ends
+     * @param gameScore The score achieved in the game
+     * @param gameKills Number of kills in the game
+     * @param gameTime Time survived in the game
+     */
+    public void updateStats(float gameScore, int gameKills, float gameTime) {
+        // Update high score if the new score is higher
+        this.score += gameScore;
+        
+        // Update max kills if the new kills count is higher
+        this.kills += gameKills;
+        
+        // Update max time lived if the new time is higher
+        if (gameTime > this.maxTimeLived) {
+            this.maxTimeLived = gameTime;
+        }
+        
+        // Save the updated stats
+        App.getApp().setLoggedInUser(this);
+    }
 }

@@ -1,0 +1,11 @@
+[
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "yo",
+	"password": "qweR123$",
+	"answer": "What is your favourite animal?",
+	"avatarPath": "profiles/3.png",
+	"keyManagment": {},
+	"sfxManager": {}
+}
+]

@@ -88,31 +88,31 @@ public class PlayerController {
         float newX = player.getGridPos().getX();
         float newY = player.getGridPos().getY();
 
-        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagment().getUp())) {
+        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagement().getUp())) {
             float y = player.getGridPos().getY();
             newY = (y - player.getSpeed());
             checkCollisionTree(newX, newY);
         }
-        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagment().getDown())) {
+        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagement().getDown())) {
             float y = player.getGridPos().getY();
             newY = (y + player.getSpeed());
             checkCollisionTree(newX, newY);
         }
-        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagment().getRight())) {
+        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagement().getRight())) {
             float x = player.getGridPos().getX();
             newX = (x - player.getSpeed() * mp);
             checkCollisionTree(newX, newY);
         }
-        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagment().getLeft())) {
+        if (Gdx.input.isKeyPressed(player.getUser().getKeyManagement().getLeft())) {
             float x = player.getGridPos().getX();
             newX = (x + player.getSpeed() * mp);
             player.getPlayerSprite().flip(true, false);
             checkCollisionTree(newX, newY);
         }
-        if (Gdx.input.isKeyJustPressed(player.getUser().getKeyManagment().getAutoAimButton())) {
+        if (Gdx.input.isKeyJustPressed(player.getUser().getKeyManagement().getAutoAimButton())) {
             autoAim();
         }
-        if(Gdx.input.isKeyJustPressed(player.getUser().getKeyManagment().getReloadButton())) {
+        if(Gdx.input.isKeyJustPressed(player.getUser().getKeyManagement().getReloadButton())) {
             player.setReloading(true);
             Timer.schedule(new Timer.Task() {
                 @Override

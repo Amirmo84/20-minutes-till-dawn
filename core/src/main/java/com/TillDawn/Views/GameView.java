@@ -782,82 +782,88 @@ public class GameView implements Screen, InputProcessor {
         stage.draw();
     }
 
-    public void lose() {
-        ScreenUtils.clear(0, 0, 0, 1);
-        timer.clear();
-        user.setScore(user.getScore() + game.getTimeGone() * player.getKills());
-        user.setKills(user.getKills() + player.getKills());
-        user.setMaxTimeLived(Math.max(user.getMaxTimeLived(), game.getTimeGone()));
-//        if (!user.isGuest()) {
-//            GameRepository.save(game);
-//        }
-//        if (!user.isGuest())
-//            UserRepository.save(user);
-        game.setOver(true);
-//        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouLoseSound());
-//        player.getUser().getSfxManager().play();
-        createLooseScreen();
-    }
-
     public void win() {
         ScreenUtils.clear(0, 0, 0, 1);
         timer.clear();
-        user.setScore(user.getScore() + game.getTimeGone() * player.getKills());
-        user.setKills(user.getKills() + player.getKills());
-        user.setMaxTimeLived(Math.max(user.getMaxTimeLived(), game.getTimeGone()));
+        // Update user stats
+        user.updateStats(game.getTimeGone() * player.getKills(), player.getKills(), game.getTimeGone());
         game.setOver(true);
-//        if (!user.isGuest()) {
-//            GameRepository.save(game);
-//        }
-//        if (!user.isGuest())
-//            UserRepository.save(user);
-//        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
-//        player.getUser().getSfxManager().play();
+        // Play win sound
+        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
+        player.getUser().getSfxManager().play();
+        // Clear and recreate stage
+        if (stage != null) {
+            stage.clear();
+        }
+        stage = new Stage(new ScreenViewport());
         createWinScreen();
     }
 
-    public void createLooseScreen() {
-        Table table = new Table();
-        table.setFillParent(true);
-        Gdx.input.setInputProcessor(stage);
-        stage.addActor(table);
-
-        Label title = new Label("YOU_LOST", new Label.LabelStyle(new BitmapFont(), Color.RED));
-        title.setFontScale(2f);
-
-        Table statsTable = createStatsTable();
-
-        Table buttonTable = createButtonTable();
-
-
-        table.add(title).padBottom(40).row();
-        table.add(statsTable).width(400).padBottom(40).row();
-        table.add(buttonTable);
-
-        stage.draw();
-
+    public void lose() {
+        ScreenUtils.clear(0, 0, 0, 1);
+        timer.clear();
+        // Update user stats
+        user.updateStats(game.getTimeGone() * player.getKills(), player.getKills(), game.getTimeGone());
+        game.setOver(true);
+        // Play lose sound
+        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouLoseSound());
+        player.getUser().getSfxManager().play();
+        // Clear and recreate stage
+        if (stage != null) {
+            stage.clear();
+        }
+        stage = new Stage(new ScreenViewport());
+        createLooseScreen();
     }
 
     public void createWinScreen() {
         Table table = new Table();
         table.setFillParent(true);
-        stage.clear();
-        stage.addActor(table);
+        
+        // Set input processor
         Gdx.input.setInputProcessor(stage);
+        
+        // Create title
         Label title = new Label("YOU_WON", new Label.LabelStyle(font, Color.GOLD));
         title.setFontScale(2f);
 
+        // Create tables
         Table statsTable = createStatsTable();
-
         Table buttonTable = createButtonTable();
 
-
+        // Add to main table
         table.add(title).padBottom(40).row();
         table.add(statsTable).width(400).padBottom(40).row();
         table.add(buttonTable);
 
+        // Add to stage
+        stage.addActor(table);
         stage.draw();
+    }
 
+    public void createLooseScreen() {
+        Table table = new Table();
+        table.setFillParent(true);
+        
+        // Set input processor
+        Gdx.input.setInputProcessor(stage);
+        
+        // Create title
+        Label title = new Label("YOU_LOST", new Label.LabelStyle(font, Color.RED));
+        title.setFontScale(2f);
+
+        // Create tables
+        Table statsTable = createStatsTable();
+        Table buttonTable = createButtonTable();
+
+        // Add to main table
+        table.add(title).padBottom(40).row();
+        table.add(statsTable).width(400).padBottom(40).row();
+        table.add(buttonTable);
+
+        // Add to stage
+        stage.addActor(table);
+        stage.draw();
     }
 
     private Table createButtonTable() {
@@ -870,6 +876,9 @@ public class GameView implements Screen, InputProcessor {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (stage != null) {
+                    stage.dispose();
+                }
                 dispose();
                 tillDawn.setScreen(new MainMenu());
             }
@@ -878,6 +887,9 @@ public class GameView implements Screen, InputProcessor {
         replayButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (stage != null) {
+                    stage.dispose();
+                }
                 dispose();
                 tillDawn.setScreen(new PreGameMenu());
             }

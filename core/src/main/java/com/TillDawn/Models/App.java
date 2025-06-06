@@ -12,7 +12,7 @@ public class App {
     private User loggedInUser;
     private User tempUser;
     private final Json json;
-    private static final String USERS_FILE = "users.json";
+    private static final String USERS_FILE = "Data/users.json";
 
     private App() {
         json = new Json();

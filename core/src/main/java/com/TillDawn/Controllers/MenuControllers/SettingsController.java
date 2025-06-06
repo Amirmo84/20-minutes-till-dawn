@@ -118,11 +118,11 @@ public class SettingsController {
                 if (user.isControlDefault()){
                     user.setControlDefault(false);
                     resultLabel.setText("You can now move with arrows!");
-                    user.getKeyManagment().changeMovement();
+                    user.getKeyManagement().changeMovement();
                 } else {
                     user.setControlDefault(true);
                     resultLabel.setText("You can now move with w-a-s-d!");
-                    user.getKeyManagment().changeMovement();
+                    user.getKeyManagement().changeMovement();
                 }
                 game.getScreen().dispose();
                 game.setScreen(new SettingsView());
@@ -217,12 +217,12 @@ public class SettingsController {
         changeReload.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (App.getApp().getLoggedInUser().getKeyManagment().getReloadButton() == Input.Keys.R) {
+                if (App.getApp().getLoggedInUser().getKeyManagement().getReloadButton() == Input.Keys.R) {
                     resultLabel.setText("You can now reload with m");
-                    App.getApp().getLoggedInUser().getKeyManagment().setReloadButton(Input.Keys.M);
+                    App.getApp().getLoggedInUser().getKeyManagement().setReloadButton(Input.Keys.M);
                 } else {
                     resultLabel.setText("You can now reload with r");
-                    App.getApp().getLoggedInUser().getKeyManagment().setReloadButton(Input.Keys.R);
+                    App.getApp().getLoggedInUser().getKeyManagement().setReloadButton(Input.Keys.R);
                 }
                 game.getScreen().dispose();
                 game.setScreen(new SettingsView());
@@ -234,12 +234,12 @@ public class SettingsController {
         changeAutoAim.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (App.getApp().getLoggedInUser().getKeyManagment().getAutoAimButton() == Input.Keys.SPACE){
+                if (App.getApp().getLoggedInUser().getKeyManagement().getAutoAimButton() == Input.Keys.SPACE){
                     resultLabel.setText("You can now auto aim with P!");
-                    App.getApp().getLoggedInUser().getKeyManagment().setAutoAimButton(Input.Keys.P);
+                    App.getApp().getLoggedInUser().getKeyManagement().setAutoAimButton(Input.Keys.P);
                 } else {
                     resultLabel.setText("You can now auto aim with space!");
-                    App.getApp().getLoggedInUser().getKeyManagment().setAutoAimButton(Input.Keys.SPACE);
+                    App.getApp().getLoggedInUser().getKeyManagement().setAutoAimButton(Input.Keys.SPACE);
                 }
                 game.getScreen().dispose();
                 game.setScreen(new SettingsView());

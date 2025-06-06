@@ -77,13 +77,13 @@ public class HintMenuController {
         table.add(new Label("CONTROLS", skin)).colspan(2).padBottom(10).row();
 
         // Only add control rows if user is available
-        if (user != null && user.getKeyManagment() != null) {
-            addControlRow(table, "UP", Input.Keys.toString(user.getKeyManagment().getUp()));
-            addControlRow(table, "DOWN", Input.Keys.toString(user.getKeyManagment().getDown()));
-            addControlRow(table, "LEFT", Input.Keys.toString(user.getKeyManagment().getLeft()));
-            addControlRow(table, "RIGHT", Input.Keys.toString(user.getKeyManagment().getRight()));
-            addControlRow(table, "AUTO AIM", Input.Keys.toString(user.getKeyManagment().getAutoAimButton()));
-            addControlRow(table, "RELOAD", Input.Keys.toString(user.getKeyManagment().getReloadButton()));
+        if (user != null && user.getKeyManagement() != null) {
+            addControlRow(table, "UP", Input.Keys.toString(user.getKeyManagement().getUp()));
+            addControlRow(table, "DOWN", Input.Keys.toString(user.getKeyManagement().getDown()));
+            addControlRow(table, "LEFT", Input.Keys.toString(user.getKeyManagement().getLeft()));
+            addControlRow(table, "RIGHT", Input.Keys.toString(user.getKeyManagement().getRight()));
+            addControlRow(table, "AUTO AIM", Input.Keys.toString(user.getKeyManagement().getAutoAimButton()));
+            addControlRow(table, "RELOAD", Input.Keys.toString(user.getKeyManagement().getReloadButton()));
             addControlRow(table, "SHOOT", "Left click");
         } else {
             addControlRow(table, "Please log in to view controls", "");
