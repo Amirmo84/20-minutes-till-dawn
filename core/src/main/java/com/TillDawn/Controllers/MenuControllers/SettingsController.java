@@ -248,7 +248,6 @@ public class SettingsController {
     }
 
     public void handleBasedOnUser(){
-//        musicVolume.setText(String.format("%d%%",(int) game.getMusicManager().getVolume() * 100));
         User user = App.getApp().getLoggedInUser();
         if (user.isGray()){
             greyScale.setText("Untoggle grey scale");

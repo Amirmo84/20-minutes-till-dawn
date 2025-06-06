@@ -19,7 +19,7 @@ public class HintMenuController {
     private TillDawn game = TillDawn.getTillDawn();
     private Skin skin = GameAssetManager.getManager().getSkin();
     private Heroes selectedHero = Heroes.SHANA;
-    private User user = new User("", "", "", "");
+    private User user = App.getApp().getLoggedInUser();
     private Label descriptionLabel = new Label(showHeroStats(selectedHero), skin);
     private Label menuTitle=  new Label("Hint Menu", skin);
 
@@ -30,7 +30,6 @@ public class HintMenuController {
     private Table table = new Table(skin);
 
     public HintMenuController() {
-        App.getApp().setLoggedInUser(user);
         table.setFillParent(true);
         table.center();
         table.pad(20);
@@ -154,8 +153,6 @@ public class HintMenuController {
             public void changed(ChangeEvent event, Actor actor) {
                 selectedHero = Heroes.getHeroByName(heroSelect.getSelected());
                 descriptionLabel.setText(showHeroStats(selectedHero));
-//                game.getScreen().dispose();
-//                game.setScreen(new HintMenuView());
             }
         });
     }

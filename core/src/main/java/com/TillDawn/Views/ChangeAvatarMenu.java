@@ -49,11 +49,11 @@ public class ChangeAvatarMenu implements Screen {
         // Avatar display
         Texture profileTexture;
         if (user.getAvatarPath().startsWith("profiles/")) {
-            // Default avatars are loaded from internal assets
+            // Use internal for default avatars
             profileTexture = new Texture(Gdx.files.internal(user.getAvatarPath()));
         } else {
-            // Custom avatars are loaded with absolute path
-            profileTexture = new Texture(Gdx.files.absolute(user.getAvatarPath()));
+            // Use local for custom avatars
+            profileTexture = new Texture(Gdx.files.local(user.getAvatarPath()));
         }
         avatar.setDrawable(new TextureRegionDrawable(new TextureRegion(profileTexture)));
         avatar.setScaling(Scaling.fit);
@@ -98,28 +98,27 @@ public class ChangeAvatarMenu implements Screen {
                     
                     if (selectedFile != null && isImageFile(selectedFile.getName())) {
                         try {
-                            // Create custom avatars directory in assets folder
-                            String customAvatarsDir = "assets/custom_avatars/";
-                            File dir = new File(customAvatarsDir);
-                            boolean created = dir.mkdirs();
-                            System.out.println("Directory created: " + created + " at " + dir.getAbsolutePath());
+                            // Create custom avatars directory in the local storage
+                            String customAvatarsDir = "custom_avatars";
+                            FileHandle dirHandle = Gdx.files.local(customAvatarsDir);
+                            dirHandle.mkdirs();
                             
                             // Generate unique filename
                             String fileName = "custom_" + System.currentTimeMillis() + ".png";
-                            String targetPath = dir.getAbsolutePath() + File.separator + fileName;
-                            System.out.println("Target path: " + targetPath);
+                            String localPath = customAvatarsDir + "/" + fileName;
                             
-                            // Copy the file
-                            File targetFile = new File(targetPath);
-                            Files.copy(selectedFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                            System.out.println("File copied successfully");
+                            // Copy the file using LibGDX's file handling
+                            FileHandle sourceFile = Gdx.files.absolute(selectedFile.getAbsolutePath());
+                            FileHandle targetFile = Gdx.files.local(localPath);
+                            sourceFile.copyTo(targetFile);
+                            System.out.println("File copied successfully to: " + targetFile.path());
                             
-                            // Update user's avatar with the absolute path
-                            user.setAvatarPath(targetFile.getAbsolutePath());
-                            System.out.println("User avatar path updated: " + targetFile.getAbsolutePath());
+                            // Update user's avatar with the local path
+                            user.setAvatarPath(localPath);
+                            System.out.println("User avatar path updated: " + localPath);
                             
-                            // Update display using absolute path
-                            Texture newTexture = new Texture(Gdx.files.absolute(targetFile.getAbsolutePath()));
+                            // Update display using local path
+                            Texture newTexture = new Texture(targetFile);
                             updateAvatarDisplay(newTexture);
                             System.out.println("Display updated successfully");
                         } catch (Exception e) {
@@ -140,6 +139,17 @@ public class ChangeAvatarMenu implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Going back to main menu...");
+                System.out.println("Current user before transition: " + 
+                    (user != null ? "Username: " + user.getUsername() + ", Avatar: " + user.getAvatarPath() : "null"));
+                
+                // Make sure App still has the current user
+                System.out.println("App's logged in user: " + 
+                    (App.getApp().getLoggedInUser() != null ? 
+                     "Username: " + App.getApp().getLoggedInUser().getUsername() + 
+                     ", Avatar: " + App.getApp().getLoggedInUser().getAvatarPath() 
+                     : "null"));
+                
                 tillDawn.getScreen().dispose();
                 tillDawn.setScreen(new MainMenu());
             }

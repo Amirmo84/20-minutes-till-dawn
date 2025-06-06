@@ -1,6 +1,7 @@
 package com.TillDawn.Controllers.MenuControllers;
 
 import com.TillDawn.Models.App;
+import com.TillDawn.Models.Enums.Paths;
 import com.TillDawn.Models.GameAssetManager;
 import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
@@ -77,6 +78,9 @@ public class LoginMenuController {
         asGuestButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                User user = new User("Guest", "", "", Paths.AVATAR.getPath() + "1.png");
+                App.getApp().getUsers().add(user);
+                App.getApp().setLoggedInUser(user);
                 registerField.setText("");
                 passwordField.setText("");
                 game.getScreen().dispose();
