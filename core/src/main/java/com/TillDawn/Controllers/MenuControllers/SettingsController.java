@@ -45,8 +45,7 @@ public class SettingsController {
     public SettingsController() {
         User user = App.getApp().getLoggedInUser();
         Language currentLanguage = (user != null) ? user.getLanguage() : Language.ENGLISH;
-        
-        // Initialize language selection
+
         languageSelect = new SelectBox<>(skin);
         String[] languages = new String[Language.values().length];
         for (int i = 0; i < Language.values().length; i++) {
@@ -55,7 +54,6 @@ public class SettingsController {
         languageSelect.setItems(languages);
         languageSelect.setSelected(currentLanguage.getDisplayName());
 
-        // Initialize all UI elements with translations
         menuTitle = new Label(currentLanguage.get("menu.settings"), skin);
         change = new Label(currentLanguage.get("settings.volume"), skin);
         resultLabel = new Label("", skin);

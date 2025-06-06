@@ -9,8 +9,7 @@
 	"kills": 1,
 	"maxTimeLived": 300,
 	"keyManagment": {},
-	"sfxManager": {},
-	"remembered": true
+	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
@@ -35,6 +34,17 @@
 		"right": 22
 	},
 	"isControlDefault": false,
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Amir54",
+	"password": "qweR12#43",
+	"avatarPath": "profiles/2.png",
+	"score": 300,
+	"kills": 1,
+	"maxTimeLived": 300,
+	"keyManagment": {},
 	"sfxManager": {}
 },
 {
@@ -165,6 +175,56 @@
 {
 	"class": "com.TillDawn.Models.User",
 	"username": "Guest17492207",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492260",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {},
+	"language": "FRENCH"
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492263",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492265",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492268",
+	"avatarPath": "custom_avatars/custom_1749226886395.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492271",
+	"avatarPath": "assets/custom_avatars/custom_1749227154591.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492271",
+	"avatarPath": "assets/custom_avatars/custom_1749227193823.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492298",
 	"avatarPath": "profiles/1.png",
 	"keyManagment": {},
 	"sfxManager": {}

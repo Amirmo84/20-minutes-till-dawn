@@ -77,7 +77,7 @@ public class LoginMenuController {
                     resultLabel.setText("Invalid password!");
                     return;
                 }
-                user.setRemembered(!rememberMeCheckbox.isChecked());
+                user.setRemembered(rememberMeCheckbox.isChecked());
                 App.getApp().setLoggedInUser(user);
                 registerField.setText("");
                 passwordField.setText("");

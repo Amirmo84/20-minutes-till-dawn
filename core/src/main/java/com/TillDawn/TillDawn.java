@@ -42,15 +42,9 @@ public class TillDawn extends Game {
                  Gdx.files.internal(Paths.GRAYSCALE.getPath() + "vertex.glsl"),
                  Gdx.files.internal(Paths.GRAYSCALE.getPath() + "f.glsl")
          );
-//        getTillDawn().setScreen(new GameView(new GameController()));
-//        App.getApp().setLoggedInUser(new User("1", "", "", "profiles/2.png"));
-//        App.getApp().getUsers().add(App.getApp().getLoggedInUser());
         getTillDawn().setScreen(new MainMenu());
         musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
-
-//        ControllersManager.init();
-//        setScreen(new SignUpMenu());
     }
 
     @Override

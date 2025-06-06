@@ -33,7 +33,7 @@ public class ForgotPasswordController {
         resultLabel.setFontScale(1.5f);
 
         table.add(answer).row();
-        table.add(answerField).width(200).row();
+        table.add(answerField).width(300).row();
         table.row();
         table.add(password).row();
         table.add(newPassword).width(400).row();

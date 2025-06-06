@@ -234,6 +234,9 @@ Songs/track2.mp3
 custom_avatars/custom_1749147756354.png
 custom_avatars/custom_1749147758921.png
 custom_avatars/custom_1749147791084.png
+custom_avatars/custom_1749227154591.png
+custom_avatars/custom_1749227183645.png
+custom_avatars/custom_1749227193823.png
 libgdx.png
 light_mask.png
 profiles/1.png

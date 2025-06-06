@@ -107,7 +107,7 @@ public class ChangeAvatarMenu implements Screen {
                     if (selectedFile != null && isImageFile(selectedFile.getName())) {
                         try {
                             // Create custom avatars directory in the local storage
-                            String customAvatarsDir = "custom_avatars";
+                            String customAvatarsDir = "assets/custom_avatars";
                             FileHandle dirHandle = Gdx.files.local(customAvatarsDir);
                             dirHandle.mkdirs();
 
@@ -173,7 +173,7 @@ public class ChangeAvatarMenu implements Screen {
                 Gdx.app.postRunnable(() -> {
                     try {
                         // Create custom avatars directory in the local storage
-                        String customAvatarsDir = "custom_avatars";
+                        String customAvatarsDir = "assets/custom_avatars";
                         FileHandle dirHandle = Gdx.files.local(customAvatarsDir);
                         dirHandle.mkdirs();
                         

@@ -46,11 +46,14 @@ public class SignUpMenuController {
 
     public SignUpMenuController() {
         image = GameAssetManager.getManager().getOthersBackGround();
+        table.setFillParent(true);
+        table.center();
+        
+        // Add background image first and set it to the back
         table.addActor(image);
         image.setPosition(0, 0);
         image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
-        table.setFillParent(true);
-        table.center();
+        
         handleRandomAvatar();
 
         resultLabel.setFontScale(1.5f);
@@ -92,8 +95,6 @@ public class SignUpMenuController {
         int index = random.nextInt(4) + 1;
         avatarPath = String.format("%s%d.png", path, index);
         avatar = new Image(new Texture(Gdx.files.internal(avatarPath)));
-//        avatar = new Image(new Texture(Gdx.files.internal("Images/Sprite/T_Lilith_Portrait.png")));
-//        avatar.setSize(194, 197);
     }
 
     private void handleBack(){
