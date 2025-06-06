@@ -262,6 +262,15 @@ public class GameView implements Screen, InputProcessor {
         }
         if (index != -1) {
             game.getTentacles().remove(index);
+            Color shadowColor = new Color(1, 0, 0, 1);
+            player.setColor(shadowColor);
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    player.setColor(null);
+                    this.cancel();
+                }
+            } , .1f , 2);
             player.setHp(player.getHp() - .3f);
         }
     }
@@ -311,6 +320,15 @@ public class GameView implements Screen, InputProcessor {
             b.getRectangle().setY(b.getSprite().getY() + direction.y * 5);
             if (b.getRectangle().overlaps(playerController.getPlayerRectangle())) {
                 index = eyeBat.getBullets().indexOf(b);
+                Color shadowColor = new Color(1, 0, 0, 1);
+                player.setColor(shadowColor);
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        player.setColor(null);
+                        this.cancel();
+                    }
+                } , .1f , 2);
                 player.setHp(player.getHp() - .2f);
             }
         }
@@ -356,6 +374,15 @@ public class GameView implements Screen, InputProcessor {
         }
         if (index != -1) {
             game.getEyeBats().remove(index);
+            Color shadowColor = new Color(1, 0, 0, 1);
+            player.setColor(shadowColor);
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    player.setColor(null);
+                    this.cancel();
+                }
+            } , .1f , 2);
             player.setHp(player.getHp() - .3f);
         }
     }

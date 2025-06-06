@@ -3,6 +3,7 @@ package com.TillDawn.Models;
 import com.TillDawn.Models.Enums.Heroes;
 import com.TillDawn.Models.Enums.Weapons;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -41,6 +42,7 @@ public class Player {
     private float width;
     private float height;
     private float time;
+    private Color color = null;
 
     public Player(User user){
         this.user = user;
@@ -302,5 +304,13 @@ public class Player {
 
     public void setMaxHp(float maxHp) {
         this.maxHp = maxHp;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

@@ -104,8 +104,13 @@
 	"class": "com.TillDawn.Models.User",
 	"username": "Guest17492160",
 	"avatarPath": "custom_avatars/custom_1749216117767.png",
+	"score": 16.42694,
+	"kills": 1,
+	"maxTimeLived": 16.42694,
 	"keyManagment": {},
-	"sfxManager": {},
+	"sfxManager": {
+		"sfxEnabled": false
+	},
 	"remembered": true
 }
 ]

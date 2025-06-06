@@ -64,7 +64,10 @@ public class PlayerController {
     public void render(SpriteBatch batch) {
 //        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
 //        batch.draw(currentFrame, x, y, width, height);
-        player.getPlayerSprite().draw(batch);
+        if (player.getColor() != null){
+            batch.draw(GameAssetManager.getManager().getDamage(), x, y, width, height);
+        } else
+            batch.draw(player.getPlayerSprite(), x, y, width, height);
         idleAnimation();
         weaponController.render(batch);
     }
