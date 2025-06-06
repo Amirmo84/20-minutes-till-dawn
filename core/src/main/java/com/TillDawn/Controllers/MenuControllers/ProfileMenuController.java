@@ -7,6 +7,7 @@ import com.TillDawn.Models.User;
 import com.TillDawn.TillDawn;
 import com.TillDawn.Views.ChangeAvatarMenu;
 import com.TillDawn.Views.MainMenu;
+import com.TillDawn.Views.ProfileMenu;
 import com.TillDawn.Views.SignUpMenu;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -78,6 +79,9 @@ public class ProfileMenuController {
                     return;
                 }
 
+                game.getScreen().dispose();
+                game.setScreen(new ProfileMenu());
+
                 App.getApp().getLoggedInUser().setUsername(username);
                 errorLabelUsername.setText("Successful!");
             }
@@ -96,6 +100,9 @@ public class ProfileMenuController {
                     return;
                 }
 
+                game.getScreen().dispose();
+                game.setScreen(new ProfileMenu());
+
                 App.getApp().getLoggedInUser().setPassword(password);
                 errorLabelPassword.setText("Successful!");
             }
@@ -109,17 +116,7 @@ public class ProfileMenuController {
                 App.getApp().getUsers().remove(App.getApp().getLoggedInUser());
                 App.getApp().setLoggedInUser(null);
                 game.getScreen().dispose();
-                game.setScreen(new SignUpMenu());
-            }
-        });
-    }
-
-    private void changeAvatar(){
-        avatarButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.getScreen().dispose();
-                game.setScreen(new ChangeAvatarMenu());
+                game.setScreen(new MainMenu());
             }
         });
     }

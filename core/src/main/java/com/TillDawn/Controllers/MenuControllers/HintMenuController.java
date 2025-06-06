@@ -36,10 +36,13 @@ public class HintMenuController {
         menuTitle.setFontScale(2f);
         table.add(menuTitle).colspan(2).padBottom(10).row();
         table.add(createHeroSelection()).colspan(2).growX().padBottom(10).row();
+        
         Table contentTable = new Table();
+        contentTable.setName("contentTable");  // Set name to find it later
         contentTable.add(createControlsSection()).width(400).padRight(20);
         contentTable.add(createCheatsSection()).width(400);
         table.add(contentTable).colspan(2).padBottom(10).row();
+        
         table.add(createAbilitiesSection()).colspan(2).growX().row();
         table.add(backButton);
     }
@@ -73,13 +76,18 @@ public class HintMenuController {
 
         table.add(new Label("CONTROLS", skin)).colspan(2).padBottom(10).row();
 
-        addControlRow(table, "UP", Input.Keys.toString(user.getKeyManagment().getUp()));
-        addControlRow(table, "DOWN", Input.Keys.toString(user.getKeyManagment().getDown()));
-        addControlRow(table, "LEFT", Input.Keys.toString(user.getKeyManagment().getLeft()));
-        addControlRow(table, "RIGHT", Input.Keys.toString(user.getKeyManagment().getRight()));
-        addControlRow(table, "AUTO AIM", Input.Keys.toString(user.getKeyManagment().getAutoAimButton()));
-        addControlRow(table, "RELOAD", Input.Keys.toString(user.getKeyManagment().getReloadButton()));
-        addControlRow(table, "SHOOT", "Left click");
+        // Only add control rows if user is available
+        if (user != null && user.getKeyManagment() != null) {
+            addControlRow(table, "UP", Input.Keys.toString(user.getKeyManagment().getUp()));
+            addControlRow(table, "DOWN", Input.Keys.toString(user.getKeyManagment().getDown()));
+            addControlRow(table, "LEFT", Input.Keys.toString(user.getKeyManagment().getLeft()));
+            addControlRow(table, "RIGHT", Input.Keys.toString(user.getKeyManagment().getRight()));
+            addControlRow(table, "AUTO AIM", Input.Keys.toString(user.getKeyManagment().getAutoAimButton()));
+            addControlRow(table, "RELOAD", Input.Keys.toString(user.getKeyManagment().getReloadButton()));
+            addControlRow(table, "SHOOT", "Left click");
+        } else {
+            addControlRow(table, "Please log in to view controls", "");
+        }
 
         return table;
     }
@@ -172,5 +180,12 @@ public class HintMenuController {
 
     public void setUser(User user) {
         this.user = user;
+        // Rebuild the controls section with the new user
+        Table contentTable = (Table) table.findActor("contentTable");
+        if (contentTable != null) {
+            contentTable.clear();
+            contentTable.add(createControlsSection()).width(400).padRight(20);
+            contentTable.add(createCheatsSection()).width(400);
+        }
     }
 }

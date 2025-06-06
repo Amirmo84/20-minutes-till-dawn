@@ -69,7 +69,7 @@ public class LoginMenuController {
                 registerField.setText("");
                 passwordField.setText("");
                 game.getScreen().dispose();
-                game.setScreen(new ProfileMenu());
+                game.setScreen(new MainMenu());
             }
         });
     }

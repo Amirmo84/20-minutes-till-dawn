@@ -105,6 +105,12 @@ public class GameView implements Screen, InputProcessor {
         public void show() {
             player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
             player.getUser().getSfxManager().play();
+            ScreenUtils.clear(0, 0, 0, 1);
+            timer.clear();
+            user.setScore(user.getScore() + game.getTimeGone() * player.getKills());
+            user.setKills(user.getKills() + player.getKills());
+            user.setMaxTimeLived(Math.max(user.getMaxTimeLived(), game.getTimeGone()));
+            createWinScreen();
         }
 
         @Override
@@ -146,8 +152,8 @@ public class GameView implements Screen, InputProcessor {
             return;
         }
         if (game.getTimeGone() >= game.getMaxTime()){
-//            win();
-            tillDawn.setScreen(new WinView());
+            win();
+//            tillDawn.setScreen(new WinView());
             return;
         }
         if (isPaused){

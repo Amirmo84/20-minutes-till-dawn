@@ -29,6 +29,7 @@ public class MainMenuController {
     private final TextButton hint = new TextButton("Hint menu", skin);
     private final TextButton logout = new TextButton("Log out", skin);
     private final TextButton exit = new TextButton("Exit", skin);
+    private final TextButton resume = new TextButton("Resume saved game", skin);
 
     // User info components
     private final Image userAvatar = new Image();
@@ -69,6 +70,7 @@ public class MainMenuController {
         logout.remove();
         exit.remove();
         userInfoTable.remove();
+        resume.remove();
 
         // Check if user is logged in
         boolean isLoggedIn = App.getApp().getLoggedInUser() != null && 
@@ -93,25 +95,29 @@ public class MainMenuController {
             // Adjust menu buttons
             table.addActor(profile);
             profile.setPosition(10, (float) Gdx.graphics.getHeight() - profile.getHeight() - 10);
+            table.addActor(settings);
+            settings.setPosition(10, (float) Gdx.graphics.getHeight() - settings.getHeight() - 110);
             
             table.addActor(preGameMenu);
-            preGameMenu.setPosition(10, (float) Gdx.graphics.getHeight() - preGameMenu.getHeight() - 110);
+            preGameMenu.setPosition(10, (float) Gdx.graphics.getHeight() - preGameMenu.getHeight() - 210);
             
             table.addActor(leaderboard);
-            leaderboard.setPosition(10, (float) Gdx.graphics.getHeight() - leaderboard.getHeight() - 210);
+            leaderboard.setPosition(10, (float) Gdx.graphics.getHeight() - leaderboard.getHeight() - 310);
             
             table.addActor(hint);
-            hint.setPosition(10, (float) Gdx.graphics.getHeight() - hint.getHeight() - 310);
+            hint.setPosition(10, (float) Gdx.graphics.getHeight() - hint.getHeight() - 410);
             
             table.addActor(logout);
             logout.setPosition(10, 10);
         }
 
         // Always show settings and exit
-        table.addActor(settings);
-        settings.setPosition(10, (float) Gdx.graphics.getHeight() - settings.getHeight() - 
-                           (isLoggedIn ? 410 : 110));
-        table.add(exit);
+//        table.addActor(settings);
+//        settings.setPosition(10, (float) Gdx.graphics.getHeight() - settings.getHeight() -
+//                           (isLoggedIn ? 410 : 110));
+        table.add(exit).row();
+        if (isLoggedIn)
+            table.add(resume);
     }
 
     private void updateUserInfo() {

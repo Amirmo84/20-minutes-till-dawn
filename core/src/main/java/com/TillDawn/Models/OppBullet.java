@@ -27,8 +27,8 @@ public class OppBullet {
         rectangle = new Rectangle(x, y, 20, 20);
 
         direction = new Vector2(
-                Gdx.graphics.getWidth() / 2f - x,
-                Gdx.graphics.getHeight() / 2f - y
+                x,
+                y
         ).nor();
     }
 

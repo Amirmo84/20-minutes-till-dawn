@@ -44,7 +44,7 @@ public class TillDawn extends Game {
 //        getTillDawn().setScreen(new GameView(new GameController()));
 //        App.getApp().setLoggedInUser(new User("1", "", "", "profiles/2.png"));
 //        App.getApp().getUsers().add(App.getApp().getLoggedInUser());
-        getTillDawn().setScreen(new SignUpMenu());
+        getTillDawn().setScreen(new MainMenu());
         musicManager.setPath(Paths.MAINSONG.getPath());
         musicManager.play(GameAssetManager.getManager().getMainMusic(), true);
     }

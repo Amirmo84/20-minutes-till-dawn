@@ -156,7 +156,11 @@ public class LeaderBoardMenu implements Screen {
                 users.sort((a, b) -> Float.compare(b.getMaxTimeLived(), a.getMaxTimeLived()));
                 break;
             case "username":
-                users.sort((a, b) -> a.getUsername().compareTo(b.getUsername()));
+                users.sort((a, b) -> {
+                    if (a == null || b == null) return 0;
+                    if (a.getUsername() == null || b.getUsername() == null) return 0;
+                    return a.getUsername().toLowerCase().compareTo(b.getUsername().toLowerCase());
+                });
                 break;
         }
     }
