@@ -83,6 +83,8 @@ public class ChangeAvatarMenu implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 String path = Paths.AVATAR.getPath() + selectAvatar.getSelected() + ".png";
                 user.setAvatarPath(path);
+                // Save the change to JSON
+                App.getApp().setLoggedInUser(user);
                 updateAvatarDisplay(new Texture(Gdx.files.internal(path)));
             }
         });
@@ -115,6 +117,8 @@ public class ChangeAvatarMenu implements Screen {
                             
                             // Update user's avatar with the local path
                             user.setAvatarPath(localPath);
+                            // Save the change to JSON
+                            App.getApp().setLoggedInUser(user);
                             System.out.println("User avatar path updated: " + localPath);
                             
                             // Update display using local path
@@ -151,7 +155,7 @@ public class ChangeAvatarMenu implements Screen {
                      : "null"));
                 
                 tillDawn.getScreen().dispose();
-                tillDawn.setScreen(new MainMenu());
+                tillDawn.setScreen(new ProfileMenu());
             }
         });
     }

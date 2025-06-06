@@ -79,11 +79,13 @@ public class ProfileMenuController {
                     return;
                 }
 
+                App.getApp().getLoggedInUser().setUsername(username);
+                App.getApp().setLoggedInUser(App.getApp().getLoggedInUser());
+                
+                errorLabelUsername.setText("Username changed successfully!");
+                
                 game.getScreen().dispose();
                 game.setScreen(new ProfileMenu());
-
-                App.getApp().getLoggedInUser().setUsername(username);
-                errorLabelUsername.setText("Successful!");
             }
         });
     }
@@ -100,11 +102,19 @@ public class ProfileMenuController {
                     return;
                 }
 
+                // Update the password
+                App.getApp().getLoggedInUser().setPassword(password);
+                // This will trigger JSON save through App class
+                App.getApp().setLoggedInUser(App.getApp().getLoggedInUser());
+                
+                errorLabelPassword.setText("Password changed successfully!");
+
+                // Clear the password field for security
+                newPassWord.setText("");
+                
+                // Refresh the screen to show updated info
                 game.getScreen().dispose();
                 game.setScreen(new ProfileMenu());
-
-                App.getApp().getLoggedInUser().setPassword(password);
-                errorLabelPassword.setText("Successful!");
             }
         });
     }
@@ -113,7 +123,7 @@ public class ProfileMenuController {
         deleteAccount.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                App.getApp().getUsers().remove(App.getApp().getLoggedInUser());
+                App.getApp().removeUser(App.getApp().getLoggedInUser());
                 App.getApp().setLoggedInUser(null);
                 game.getScreen().dispose();
                 game.setScreen(new MainMenu());

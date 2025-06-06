@@ -121,7 +121,7 @@ public class SignUpMenuController {
                     return;
                 }
                 User user = new User(username, password, security.getText(), avatarPath);
-                App.getApp().getUsers().add(user);
+                App.getApp().addUser(user);
                 App.getApp().setLoggedInUser(user);
                 resultLabel.setText("");
                 passwordField.setText("");

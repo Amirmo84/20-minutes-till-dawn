@@ -1,10 +1,77 @@
 [
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "yo",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"score": 307.11118,
+	"kills": 2,
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "io",
 	"password": "qweR123$",
 	"answer": "What is your favourite animal?",
-	"avatarPath": "profiles/3.png",
+	"avatarPath": "profiles/4.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 185.10385,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
 	"keyManagment": {},
 	"sfxManager": {}
 }

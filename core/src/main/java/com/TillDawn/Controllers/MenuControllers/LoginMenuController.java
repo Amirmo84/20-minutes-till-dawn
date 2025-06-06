@@ -79,7 +79,7 @@ public class LoginMenuController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 User user = new User("Guest", "", "", Paths.AVATAR.getPath() + "1.png");
-                App.getApp().getUsers().add(user);
+                App.getApp().addUser(user);
                 App.getApp().setLoggedInUser(user);
                 registerField.setText("");
                 passwordField.setText("");

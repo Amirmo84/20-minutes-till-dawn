@@ -3,33 +3,24 @@ package com.TillDawn.Models;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class User {
-    private String username;
-    private String password;
-    private String answer;
-    private String avatarPath;
-    private float score;
-    private int kills;
-    private float maxTimeLived;
-    private KeyManagment keyManagment;
-    private boolean isGray;
+    private String username = "";
+    private String password = "";
+    private String answer = "";
+    private String avatarPath = "";
+    private float score = 0;
+    private int kills = 0;
+    private float maxTimeLived = 0;
+    private KeyManagment keyManagment = new KeyManagment();
+    private boolean isGray = false;
     private boolean isControlDefault = true;
     private boolean reloadAuto = true;
     private float gameLength = 20f;
-    private Game currentGame;
-    private SFXManager sfxManager;
+    private transient Game currentGame;
+    private SFXManager sfxManager = new SFXManager();
 
     // No-args constructor for JSON serialization
     public User() {
-        this.username = "";
-        this.password = "";
-        this.answer = "";
-        this.avatarPath = "";
-        this.score = 0;
-        this.kills = 0;
-        this.maxTimeLived = 0;
-        this.keyManagment = new KeyManagment();
-        this.isGray = false;
-        this.sfxManager = new SFXManager();
+        // All fields are already initialized with their default values
     }
 
     public User(String username, String password, String answer, String avatarPath) {
@@ -37,12 +28,6 @@ public class User {
         this.password = password;
         this.answer = answer;
         this.avatarPath = avatarPath;
-        this.score = 0;
-        this.kills = 0;
-        this.maxTimeLived = 0;
-        this.keyManagment = new KeyManagment();
-        this.isGray = false;
-        this.sfxManager = new SFXManager();
     }
 
     public String getUsername() {
@@ -81,16 +66,18 @@ public class User {
         return score;
     }
 
-    public void setScore(float score) {
-        this.score = score;
+    public void modifyScore(float score) {
+        this.score += score;
+        App.getApp().setLoggedInUser(this);
     }
 
     public int getKills() {
         return kills;
     }
 
-    public void setKills(int kills) {
-        this.kills = kills;
+    public void modifyKills(int kills) {
+        this.kills += kills;
+        App.getApp().setLoggedInUser(this);
     }
 
     public float getMaxTimeLived() {
@@ -98,7 +85,9 @@ public class User {
     }
 
     public void setMaxTimeLived(float maxTimeLived) {
-        this.maxTimeLived = maxTimeLived;
+        if (maxTimeLived > this.maxTimeLived)
+            this.maxTimeLived = maxTimeLived;
+        App.getApp().setLoggedInUser(this);
     }
 
     public KeyManagment getKeyManagement() {

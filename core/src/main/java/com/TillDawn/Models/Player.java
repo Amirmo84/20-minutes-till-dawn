@@ -11,9 +11,9 @@ import com.badlogic.gdx.math.Rectangle;
 import java.util.HashSet;
 
 public class Player {
-    private TextureRegion playerTexture;
-    private final User user;
-    private Sprite playerSprite;
+    private transient TextureRegion playerTexture;
+    private final transient User user;
+    private transient Sprite playerSprite;
     private Heroes hero;
     private Weapons weapon;
     private GridPos gridPos;
@@ -35,8 +35,8 @@ public class Player {
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
     private HashSet<Integer> abilities = new HashSet<Integer>();
-    private Animation<TextureRegion> animation;
-    private Rectangle rectangle;
+    private transient Animation<TextureRegion> animation;
+    private transient Rectangle rectangle;
     private boolean isReloading = false;
     private float width;
     private float height;
@@ -117,12 +117,7 @@ public class Player {
             return;
         }
         isHurt = true;
-        this.hp = Math.clamp(hp, 0, maxHp);
-//        if(hp > maxHp){
-//            hp = maxHp;
-//        }
-//        System.out.println(this.hp);
-//        this.hp = Math.max(hp, 0);
+        this.hp = Math.min(Math.max(hp, 0), maxHp);
     }
 
     public int getXp() {

@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 
 public class SFXManager extends InputAdapter {
     private boolean sfxEnabled = true;
-    private Sound sound;
+    private transient Sound sound;
 
     public void setSfxEnabled(boolean enabled) {
         sfxEnabled = enabled;

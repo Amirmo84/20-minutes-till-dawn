@@ -107,8 +107,8 @@ public class GameView implements Screen, InputProcessor {
             player.getUser().getSfxManager().play();
             ScreenUtils.clear(0, 0, 0, 1);
             timer.clear();
-            user.setScore(user.getScore() + game.getTimeGone() * player.getKills());
-            user.setKills(user.getKills() + player.getKills());
+//            user.setScore(user.getScore() + game.getTimeGone() * player.getKills());
+//            user.setKills(user.getKills() + player.getKills());
             user.setMaxTimeLived(Math.max(user.getMaxTimeLived(), game.getTimeGone()));
             createWinScreen();
         }
@@ -635,8 +635,6 @@ public class GameView implements Screen, InputProcessor {
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                if (!user.isGuest())
-//                    GameRepository.save(game);
                 dispose();
                 tillDawn.setScreen(new MainMenu());
             }
@@ -645,11 +643,11 @@ public class GameView implements Screen, InputProcessor {
         giveUpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                if (!user.isGuest())
-//                    GameRepository.save(game);
                 isPaused = false;
                 isLose = true;
-                stage.clear();
+                if (stage != null) {
+                    stage.clear();
+                }
             }
         });
 
@@ -658,7 +656,9 @@ public class GameView implements Screen, InputProcessor {
             public void clicked(InputEvent event, float x, float y) {
                 isPaused = false;
                 user.setGray(!user.isGray());
-                stage.clear();
+                if (stage != null) {
+                    stage.clear();
+                }
                 stage = new Stage(new ScreenViewport());
                 setInputProccessor();
             }
@@ -785,85 +785,88 @@ public class GameView implements Screen, InputProcessor {
     public void win() {
         ScreenUtils.clear(0, 0, 0, 1);
         timer.clear();
-        // Update user stats
-        user.updateStats(game.getTimeGone() * player.getKills(), player.getKills(), game.getTimeGone());
-        game.setOver(true);
-        // Play win sound
-        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
-        player.getUser().getSfxManager().play();
-        // Clear and recreate stage
-        if (stage != null) {
-            stage.clear();
+
+        if (!game.isOver()) {
+            float finalScore = game.getTimeGone() * player.getKills();
+            int finalKills = player.getKills();
+            float finalTime = game.getTimeGone();
+            
+            // Update all stats at once to avoid race conditions
+            user.updateStats(finalScore, finalKills, finalTime);
+            
+            player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
+            player.getUser().getSfxManager().play();
         }
-        stage = new Stage(new ScreenViewport());
+        // Mark game as over
+        game.setOver(true);
+        
         createWinScreen();
     }
 
     public void lose() {
         ScreenUtils.clear(0, 0, 0, 1);
         timer.clear();
-        // Update user stats
-        user.updateStats(game.getTimeGone() * player.getKills(), player.getKills(), game.getTimeGone());
-        game.setOver(true);
-        // Play lose sound
-        player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouLoseSound());
-        player.getUser().getSfxManager().play();
-        // Clear and recreate stage
-        if (stage != null) {
-            stage.clear();
+
+        if (!game.isOver()) {
+            float finalScore = game.getTimeGone() * player.getKills();
+            int finalKills = player.getKills();
+            float finalTime = game.getTimeGone();
+            
+            // Update all stats at once to avoid race conditions
+            user.updateStats(finalScore, finalKills, finalTime);
+            
+            player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouLoseSound());
+            player.getUser().getSfxManager().play();
         }
-        stage = new Stage(new ScreenViewport());
+        
+        // Mark game as over
+        game.setOver(true);
+
         createLooseScreen();
-    }
-
-    public void createWinScreen() {
-        Table table = new Table();
-        table.setFillParent(true);
-        
-        // Set input processor
-        Gdx.input.setInputProcessor(stage);
-        
-        // Create title
-        Label title = new Label("YOU_WON", new Label.LabelStyle(font, Color.GOLD));
-        title.setFontScale(2f);
-
-        // Create tables
-        Table statsTable = createStatsTable();
-        Table buttonTable = createButtonTable();
-
-        // Add to main table
-        table.add(title).padBottom(40).row();
-        table.add(statsTable).width(400).padBottom(40).row();
-        table.add(buttonTable);
-
-        // Add to stage
-        stage.addActor(table);
-        stage.draw();
     }
 
     public void createLooseScreen() {
         Table table = new Table();
         table.setFillParent(true);
-        
-        // Set input processor
         Gdx.input.setInputProcessor(stage);
-        
-        // Create title
-        Label title = new Label("YOU_LOST", new Label.LabelStyle(font, Color.RED));
+        stage.addActor(table);
+
+        Label title = new Label("YOU_LOST", new Label.LabelStyle(new BitmapFont(), Color.RED));
         title.setFontScale(2f);
 
-        // Create tables
         Table statsTable = createStatsTable();
+
         Table buttonTable = createButtonTable();
 
-        // Add to main table
+
         table.add(title).padBottom(40).row();
         table.add(statsTable).width(400).padBottom(40).row();
         table.add(buttonTable);
 
-        // Add to stage
-        stage.addActor(table);
         stage.draw();
+
+    }
+
+    public void createWinScreen() {
+        Table table = new Table();
+        table.setFillParent(true);
+        stage.clear();
+        stage.addActor(table);
+        Gdx.input.setInputProcessor(stage);
+        Label title = new Label("YOU_WON", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        title.setFontScale(2f);
+
+        Table statsTable = createStatsTable();
+
+        Table buttonTable = createButtonTable();
+
+
+        table.add(title).padBottom(40).row();
+        table.add(statsTable).width(400).padBottom(40).row();
+        table.add(buttonTable);
+
+        stage.draw();
+
     }
 
     private Table createButtonTable() {
@@ -876,9 +879,6 @@ public class GameView implements Screen, InputProcessor {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (stage != null) {
-                    stage.dispose();
-                }
                 dispose();
                 tillDawn.setScreen(new MainMenu());
             }
@@ -887,9 +887,6 @@ public class GameView implements Screen, InputProcessor {
         replayButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (stage != null) {
-                    stage.dispose();
-                }
                 dispose();
                 tillDawn.setScreen(new PreGameMenu());
             }
@@ -941,8 +938,20 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public void dispose() {
+        if (lightMask != null) {
+            lightMask.dispose();
+            lightMask = null;
+        }
+        if (font != null) {
+            font.dispose();
+            font = null;
+        }
+        stage.clear();
+        stage.dispose();
+//        if (playerController != null && playerController.getWeaponController() != null) {
+//            playerController.getWeaponController().dispose();
+//        }
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-        this.stage.dispose();
     }
 
     @Override
