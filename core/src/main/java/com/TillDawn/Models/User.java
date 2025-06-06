@@ -1,5 +1,6 @@
 package com.TillDawn.Models;
 
+import com.TillDawn.Models.Enums.Language;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class User {
@@ -18,6 +19,7 @@ public class User {
     private transient Game currentGame;
     private SFXManager sfxManager = new SFXManager();
     private boolean remembered = false;
+    private Language language = Language.ENGLISH;
 
     // No-args constructor for JSON serialization
     public User() {
@@ -189,5 +191,18 @@ public class User {
 
     public void setRemembered(boolean remembered) {
         this.remembered = remembered;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+        App.getApp().setLoggedInUser(this);
+    }
+
+    public String translate(String key) {
+        return language.get(key);
     }
 }

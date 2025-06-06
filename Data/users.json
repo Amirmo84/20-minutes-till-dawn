@@ -107,10 +107,10 @@
 	"score": 16.42694,
 	"kills": 1,
 	"maxTimeLived": 16.42694,
-	"keyManagment": {},
-	"sfxManager": {
-		"sfxEnabled": false
+	"keyManagment": {
+		"autoAimButton": 44
 	},
+	"sfxManager": {},
 	"remembered": true
 }
 ]
