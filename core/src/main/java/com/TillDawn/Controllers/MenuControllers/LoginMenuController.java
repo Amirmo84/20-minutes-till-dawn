@@ -37,9 +37,9 @@ public class LoginMenuController {
 
     public LoginMenuController() {
         image = GameAssetManager.getManager().getOthersBackGround();
-        table.addActor(image);
-        image.setPosition(0, 0);
-        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
+//        table.addActor(image);
+//        image.setPosition(0, 0);
+//        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
         table.center();
 
@@ -57,7 +57,8 @@ public class LoginMenuController {
         table.row().pad(10, 0 , 10, 0);
         table.add(loginButton).height(100).row();
         table.add(asGuestButton).height(100).row();
-        table.add(forgotPassword).height(100);
+        table.add(forgotPassword).height(100).row();
+        table.add(back).height(100);
     }
 
     private void handleLogin(){

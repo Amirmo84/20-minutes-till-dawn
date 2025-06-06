@@ -269,5 +269,21 @@
 	"maxTimeLived": 17.975512,
 	"keyManagment": {},
 	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "fsdfdfg",
+	"password": "dsadWEer#4q32",
+	"answer": "What is your favourite animal?",
+	"avatarPath": "profiles/2.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492330",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
 }
 ]

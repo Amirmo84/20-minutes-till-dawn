@@ -46,6 +46,10 @@ public class SignUpMenuController {
 
     public SignUpMenuController() {
         image = GameAssetManager.getManager().getOthersBackGround();
+//        table.addActor(image);
+//        image.setPosition(0, 0);
+//        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
+//        image.setFillParent(true);
         table.setFillParent(true);
         table.center();
         
