@@ -1,5 +1,7 @@
 package com.TillDawn.Models;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -15,6 +17,10 @@ public class Game {
     private float backWidth;
     private float backHeight;
     private ElderBoss elderBoss = null;
+
+    public Game() {
+        initializeTrees(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50);
+    }
 
     public void updateItemsTime(float time){
         for (Tree tree : this.getTrees()){

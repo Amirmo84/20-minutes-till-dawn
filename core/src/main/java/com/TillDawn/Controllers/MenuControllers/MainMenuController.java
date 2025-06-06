@@ -291,6 +291,16 @@ public class MainMenuController {
         });
     }
 
+    private void handleResume(){
+        resume.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreen().dispose();
+                game.setScreen(new GameView());
+            }
+        });
+    }
+
     public void handleButtons() {
         handleSignInButton();
         handleSettings();
@@ -300,5 +310,6 @@ public class MainMenuController {
         handleLeaderBoard();
         handleProfile();
         handleLogout();
+        handleResume();
     }
 }

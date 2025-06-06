@@ -228,5 +228,46 @@
 	"avatarPath": "profiles/1.png",
 	"keyManagment": {},
 	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492320",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492321",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492321",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492323",
+	"avatarPath": "profiles/1.png",
+	"score": 48.250385,
+	"kills": 2,
+	"maxTimeLived": 24.125193,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492324",
+	"avatarPath": "profiles/1.png",
+	"score": 17.975512,
+	"kills": 1,
+	"maxTimeLived": 17.975512,
+	"keyManagment": {},
+	"sfxManager": {}
 }
 ]

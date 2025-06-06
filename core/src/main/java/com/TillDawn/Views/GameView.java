@@ -67,7 +67,7 @@ public class GameView implements Screen, InputProcessor {
         game.setBackWidth(getBackgroundWidth());
         player = game.getPlayer();
         playerController = new PlayerController(player, game, this);
-        game.initializeTrees(screenWidth, screenHeight, 50);
+//        game.initializeTrees(screenWidth, screenHeight, 50);
         timer = new Timer();
         Timer.schedule(new Timer.Task() {
             @Override
@@ -608,7 +608,7 @@ public class GameView implements Screen, InputProcessor {
         addCheatRow(table, "Key 2", "PLAYER_LEVEL_UP");
         addCheatRow(table, "Key 3", "INCREASE_HP");
         addCheatRow(table, "Key 4", "GO_TO_BOSS_FIGHT");
-        addCheatRow(table, "Key 5", "INCREASE_PROJECTILE");
+        addCheatRow(table, "Key 5", "INCREASE_MAX_AMMO");
 
         table.add().height(20).row();
         Label abilitiesTitle = new Label("PLAYER_ABILITIES", skin);
@@ -823,6 +823,7 @@ public class GameView implements Screen, InputProcessor {
             
             player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouWinSound());
             player.getUser().getSfxManager().play();
+            user.setCurrentGame(null);
         }
         // Mark game as over
         game.setOver(true);
@@ -844,6 +845,7 @@ public class GameView implements Screen, InputProcessor {
             
             player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getYouLoseSound());
             player.getUser().getSfxManager().play();
+            user.setCurrentGame(null);
         }
         
         // Mark game as over
