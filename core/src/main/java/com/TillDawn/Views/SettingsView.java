@@ -16,6 +16,7 @@ public class SettingsView implements Screen {
         Gdx.input.setInputProcessor(stage);
         ControllersManager.settingsController.handleBasedOnUser();
         stage.addActor(ControllersManager.settingsController.getTable());
+        ControllersManager.settingsController.handleButtons();
     }
 
     @Override
@@ -23,7 +24,6 @@ public class SettingsView implements Screen {
         ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-        ControllersManager.settingsController.handleButtons();
     }
 
     @Override

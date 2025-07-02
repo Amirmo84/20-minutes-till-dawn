@@ -75,10 +75,11 @@ public class WeaponController {
         if (player.isReloading()) {
             return;
         }
-        player.setAmmo(Math.max(player.getAmmo() - 1, 0));
         if (player.getAmmo() == 0) {
             if (player.getUser().isReloadAuto()) {
                 player.setReloading(true);
+                player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getReloadSound());
+                player.getUser().getSfxManager().play();
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
@@ -88,7 +89,9 @@ public class WeaponController {
                     }
                 }, player.getWeapon().getTimeReload(), 2);
             }
+            return;
         }
+        player.setAmmo(Math.max(player.getAmmo() - 1, 0));
         player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getShootSound());
         player.getUser().getSfxManager().play();
         for (int i = 0; i < player.getWeapon().getProjectile() + player.getProjectileAddition(); i++) {
@@ -167,11 +170,19 @@ public class WeaponController {
                     bulletsIndexToRemove.add(bullets.indexOf(b));
                     boss.setHp(boss.getHp() - b.getDamage() * player.getDamageMp());
                     Vector2 direction = b.getDirection();
-                    boss.setHp(boss.getHp() - b.getDamage());
-                    boss.setX(b.getX() - direction.x * 5);
-                    boss.setY(b.getY() + direction.y * 5);
-                    boss.getRectangle().setX(boss.getRectangle().getX() - direction.x * 5);
-                    boss.getRectangle().setY(boss.getRectangle().getY() + direction.y * 5);
+//                    boss.setX(b.getX() - direction.x * 5);
+//                    boss.setY(b.getY() + direction.y * 5);
+//                    boss.getRectangle().setX(boss.getRectangle().getX() - direction.x * 5);
+//                    boss.getRectangle().setY(boss.getRectangle().getY() + direction.y * 5);
+                    Color shadowColor = new Color(1, 0, 0, 0.5f);
+                    boss.setColor(shadowColor);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            boss.setColor(null);
+                            this.cancel();
+                        }
+                    } , .2f , 2);
                     if (boss.getHp() <= 0) {
                         player.setKills(player.getKills() + 1);
                         game.setElderBoss(null);

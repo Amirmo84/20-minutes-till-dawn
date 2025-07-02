@@ -15,7 +15,7 @@ public class OppBullet {
     private float y;
     private Vector2 direction;
 
-    public OppBullet(float x, float y) {
+    public OppBullet(float x, float y, float x1, float y1) {
         this.damage = .1f;
         this.x = x;
         this.y = y;
@@ -30,6 +30,14 @@ public class OppBullet {
                 x,
                 y
         ).nor();
+//        direction = new Vector2(
+//                x1 - x,
+//                y1 - y
+//        ).nor();
+//        direction = new Vector2(
+//                Gdx.graphics.getWidth() / 2f - x1,
+//                Gdx.graphics.getHeight() / 2f - y1
+//        ).nor();
     }
 
     public Texture getTexture() {

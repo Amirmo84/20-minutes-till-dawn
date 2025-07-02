@@ -61,9 +61,9 @@ public class PreGameController {
     }
 
     private void setupUI() {
-//        table.addActor(image);
-//        image.setPosition(0, 0);
-//        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
+        table.addActor(image);
+        image.setPosition(0, 0);
+        image.setSize((float) Gdx.graphics.getWidth(), (float) Gdx.graphics.getHeight());
         table.setFillParent(true);
         table.center();
 

@@ -30,7 +30,8 @@ public enum Paths {
     LOSE("AudioClip/YouLose.wav"),
     LevelUp("AudioClip/Powerup.wav"),
     PregameBackground("BackGround/featured_com.Flanne.MinutesTillDawn.roguelike.shooting.gp_-1.jpg"),
-    OthersBackground("BackGround/20-minutes-till-dawn-huwun.png")
+    OthersBackground("BackGround/20-minutes-till-dawn-huwun.png"),
+    RELOADSOUND("AudioClip/Weapon_Shotgun_Reload.wav")
     ;
 
     private final String path;

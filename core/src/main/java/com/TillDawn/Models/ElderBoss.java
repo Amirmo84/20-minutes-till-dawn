@@ -1,6 +1,7 @@
 package com.TillDawn.Models;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,6 +17,7 @@ public class ElderBoss {
     private float stateTime = 0;
     private float hp = 400f;
     private float walkStateTime = 0;
+    private Color color;
 
     public ElderBoss(float x, float y) {
         this.x = x;
@@ -109,5 +111,13 @@ public class ElderBoss {
 
     public void modifyStateTime(float time){
         this.stateTime += time;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

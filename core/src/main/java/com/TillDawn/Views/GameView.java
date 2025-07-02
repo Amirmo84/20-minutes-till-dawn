@@ -54,6 +54,8 @@ public class GameView implements Screen, InputProcessor {
     private BitmapFont font;
     private Texture lightMask = new Texture(Gdx.files.internal("light_mask.png"));
     private Sprite lightSprite = new Sprite(lightMask);
+    private float bossFirstX;
+    private float bossFirstY;
 
 
     @Override
@@ -193,6 +195,7 @@ public class GameView implements Screen, InputProcessor {
         timeUpdate(delta);
         playerController.update(delta);
         playerController.handlePlayerInput();
+        playerController.handleOutOfBounds();
         playerController.render(tillDawn.getBatch());
         renderTrees();
         renderTentacles();
@@ -235,8 +238,8 @@ public class GameView implements Screen, InputProcessor {
             tentaclesTime = 0;
             int count = (int) Math.ceil(time / 50);
             for (int i = 0; i < count; i++) {
-                float xPos = (float) (Math.random() * (getBackgroundWidth() - 30f));
-                float yPos = (float) (Math.random() * (getBackgroundHeight() - 30f));
+                float xPos = (float) (Math.random() * (getBackgroundWidth() * 4 - 30f));
+                float yPos = (float) (Math.random() * (getBackgroundHeight() * 4 - 30f));
                 Tentacle tentacle = new Tentacle(xPos, yPos);
 
                 game.getTentacles().add(tentacle);
@@ -369,7 +372,7 @@ public class GameView implements Screen, InputProcessor {
             if (b.getShotTime() > 5) {
                 b.setShotTime(0);
                 b.getBullets().add(new OppBullet(player.getGridPos().getX() + b.getX(),
-                        player.getGridPos().getY() + b.getY()));
+                        player.getGridPos().getY() + b.getY(), player.getGridPos().getX(), player.getGridPos().getY()));
             }
         }
         if (index != -1) {
@@ -480,8 +483,10 @@ public class GameView implements Screen, InputProcessor {
     }
 
     public void spawnBoss(){
-        float posX = (int) (Math.random() * screenWidth) + player.getGridPos().getX();
-        float posY = (int) (Math.random() * screenHeight) + player.getGridPos().getY();
+        float posX = (int) (Math.random() * screenWidth + 1000);
+        float posY = (int) (Math.random() * screenHeight + 1000);
+        bossFirstX = posX;
+        bossFirstY = posY;
         ElderBoss boss = new ElderBoss(posX, posY);
         game.setElderBoss(boss);
     }
@@ -490,8 +495,12 @@ public class GameView implements Screen, InputProcessor {
         if (game.getElderBoss() != null) {
             ElderBoss boss = game.getElderBoss();
             TextureRegion currentFrame = boss.getAnimation().getKeyFrame(boss.getStateTime(), true);
-            tillDawn.getBatch().draw(currentFrame, player.getGridPos().getX() + boss.getX(),
-                    player.getGridPos().getY() + boss.getY(), boss.getWidth(), boss.getHeight());
+            if (boss.getColor() == null)
+                tillDawn.getBatch().draw(currentFrame, player.getGridPos().getX() + boss.getX(),
+                        player.getGridPos().getY() + boss.getY(), boss.getWidth(), boss.getHeight());
+            else
+                tillDawn.getBatch().draw(GameAssetManager.getManager().getDamage(), player.getGridPos().getX() + boss.getX(),
+                        player.getGridPos().getY() + boss.getY(), boss.getWidth(), boss.getHeight());
             boss.getRectangle().setX(player.getGridPos().getX() + boss.getX());
             boss.getRectangle().setY(player.getGridPos().getY() + boss.getY());
         }
@@ -504,8 +513,8 @@ public class GameView implements Screen, InputProcessor {
 
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.YELLOW);
-            shapeRenderer.rect(boss.getX() + player.getGridPos().getX() - boss.getBounds().getWidth() / 2f,
-                    boss.getY() + player.getGridPos().getY() - boss.getBounds().getHeight() / 2f,
+            shapeRenderer.rect(bossFirstX + player.getGridPos().getX() - boss.getBounds().getWidth() / 2f,
+                    bossFirstY + player.getGridPos().getY() - boss.getBounds().getHeight() / 2f,
                     boss.getBounds().getWidth(), boss.getBounds().getHeight());
             shapeRenderer.end();
         }
@@ -516,19 +525,19 @@ public class GameView implements Screen, InputProcessor {
             ElderBoss boss = game.getElderBoss();
             float x = Gdx.graphics.getWidth() / 2f;
             float y = Gdx.graphics.getHeight() / 2f;
-            if (boss.getX() + player.getGridPos().getX() + boss.getBounds().getWidth() / 2f
+            if (bossFirstX + player.getGridPos().getX() + boss.getBounds().getWidth() / 2f
                     - playerController.getWidth() / 2f <= x) {
                 player.getGridPos().setX(player.getGridPos().getX() + 80f);
                 player.setHp(player.getHp() - .1f);
-            } else if (boss.getX() + player.getGridPos().getX() - boss.getBounds().getWidth() / 2f
+            } else if (bossFirstX + player.getGridPos().getX() - boss.getBounds().getWidth() / 2f
                     + playerController.getWidth() / 2f >= x) {
                 player.getGridPos().setX(player.getGridPos().getX() - 80f);
                 player.setHp(player.getHp() - .1f);
-            } else if (boss.getY() + player.getGridPos().getY() + boss.getBounds().getHeight() / 2f
+            } else if (bossFirstY + player.getGridPos().getY() + boss.getBounds().getHeight() / 2f
                     - playerController.getHeight() / 2f - 50f <= y) {
                 player.getGridPos().setY(player.getGridPos().getY() + 80f);
                 player.setHp(player.getHp() - .1f);
-            } else if (boss.getY() + player.getGridPos().getY() - boss.getBounds().getHeight() / 2f
+            } else if (bossFirstY + player.getGridPos().getY() - boss.getBounds().getHeight() / 2f
                     + playerController.getHeight() / 2f - 50f >= y) {
                 player.getGridPos().setY(player.getGridPos().getY() - 80f);
                 player.setHp(player.getHp() - .1f);
@@ -600,18 +609,18 @@ public class GameView implements Screen, InputProcessor {
 
         Gdx.input.setInputProcessor(stage);
 
-        Label cheatTitle = new Label("CHEAT_CODES", skin);
+        Label cheatTitle = new Label("CHEAT CODES", skin);
         table.add(cheatTitle).colspan(2).center().row();
         table.padTop(10).row();
 
-        addCheatRow(table, "Key 1", "DECREASE_GAME_TIME");
-        addCheatRow(table, "Key 2", "PLAYER_LEVEL_UP");
-        addCheatRow(table, "Key 3", "INCREASE_HP");
-        addCheatRow(table, "Key 4", "GO_TO_BOSS_FIGHT");
-        addCheatRow(table, "Key 5", "INCREASE_MAX_AMMO");
+        addCheatRow(table, "Key 1", "DECREASE GAME TIME");
+        addCheatRow(table, "Key 2", "PLAYER LEVEL UP");
+        addCheatRow(table, "Key 3", "INCREASE HP");
+        addCheatRow(table, "Key 4", "GO TO BOSS FIGHT");
+        addCheatRow(table, "Key 5", "INCREASE MAX AMMO");
 
         table.add().height(20).row();
-        Label abilitiesTitle = new Label("PLAYER_ABILITIES", skin);
+        Label abilitiesTitle = new Label("PLAYER ABILITIES", skin);
         table.add(abilitiesTitle).colspan(2).center().row();
 
         for (Integer i : player.getAbilities()) {
@@ -637,8 +646,8 @@ public class GameView implements Screen, InputProcessor {
 
         TextButton resumeButton = new TextButton("RESUME", skin);
         TextButton quitButton = new TextButton("QUIT", skin);
-        TextButton giveUpButton = new TextButton("GIVE_UP", skin);
-        TextButton blackShader = new TextButton("WHITE_BLACK", skin);
+        TextButton giveUpButton = new TextButton("GIVE UP", skin);
+        TextButton blackShader = new TextButton("WHITE/BLACK", skin);
 
 
         //TODO can remove this
@@ -723,7 +732,7 @@ public class GameView implements Screen, InputProcessor {
         table.setFillParent(true);
         Gdx.input.setInputProcessor(stage);
 
-        table.add(new Label("CHOOSE_ABILITY", skin, "title")).row();
+        table.add(new Label("CHOOSE ABILITY", skin, "title")).row();
 
         TextButton vitality = new TextButton("Vitality ", skin);
         TextButton damager = new TextButton("Damager ", skin);
@@ -860,7 +869,7 @@ public class GameView implements Screen, InputProcessor {
         Gdx.input.setInputProcessor(stage);
         stage.addActor(table);
 
-        Label title = new Label("YOU_LOST", new Label.LabelStyle(new BitmapFont(), Color.RED));
+        Label title = new Label("YOU LOST", new Label.LabelStyle(new BitmapFont(), Color.RED));
         title.setFontScale(2f);
 
         Table statsTable = createStatsTable();
@@ -882,7 +891,7 @@ public class GameView implements Screen, InputProcessor {
         stage.clear();
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
-        Label title = new Label("YOU_WON", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        Label title = new Label("YOU WON", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
         title.setFontScale(2f);
 
         Table statsTable = createStatsTable();
@@ -902,8 +911,8 @@ public class GameView implements Screen, InputProcessor {
         Table buttonTable = new Table();
         buttonTable.defaults().pad(10).width(200).height(60);
 
-        TextButton menuButton = new TextButton("MAIN_MENU", skin);
-        TextButton replayButton = new TextButton("PLAY_AGAIN", skin);
+        TextButton menuButton = new TextButton("MAIN MENU", skin);
+        TextButton replayButton = new TextButton("PLAY AGAIN", skin);
 
         menuButton.addListener(new ClickListener() {
             @Override
@@ -931,12 +940,12 @@ public class GameView implements Screen, InputProcessor {
         Table statsTable = new Table();
         statsTable.defaults().pad(10).left();
 
-        statsTable.add(new Label("MISSION_REPORT", skin)).colspan(2).center().row();
+        statsTable.add(new Label("MISSION REPORT", skin)).colspan(2).center().row();
 
         addStatRow(statsTable, "USERNAME" + " : ", player.getUser().getUsername(), "user-icon");
-        addStatRow(statsTable, "ENEMY_DEFEATED" + " : ", String.valueOf(player.getKills()), "skull-icon");
-        addStatRow(statsTable, "SURVIVAL_TIME" + " : ", formatTime(game.getTimeGone()), "clock-icon");
-        addStatRow(statsTable, "TOTAL_SCORE" + " : ", String.valueOf(game.getTimeGone() * player.getKills()),
+        addStatRow(statsTable, "ENEMY DEFEATED" + " : ", String.valueOf(player.getKills()), "skull-icon");
+        addStatRow(statsTable, "SURVIVAL TIME" + " : ", formatTime(game.getTimeGone()), "clock-icon");
+        addStatRow(statsTable, "TOTAL SCORE" + " : ", String.valueOf(game.getTimeGone() * player.getKills()),
                 "star-icon");
 
         return statsTable;

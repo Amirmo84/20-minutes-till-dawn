@@ -144,8 +144,8 @@ public class SettingsController {
                 Language newLanguage = Language.fromDisplayName(languageSelect.getSelected());
                 user.setLanguage(newLanguage);
                 updateAllButtonStates();
-                game.getScreen().dispose();
-                game.setScreen(new SettingsView());
+//                game.getScreen().dispose();
+//                game.setScreen(new SettingsView());
             }
         });
     }
@@ -198,7 +198,9 @@ public class SettingsController {
                     changeControllers.setText(user.translate("settings.controls") + " (WASD)");
                     user.getKeyManagement().changeMovement();
                 }
-                updateAllButtonStates();
+//                updateAllButtonStates();
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -294,6 +296,7 @@ public class SettingsController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 User user = App.getApp().getLoggedInUser();
+                System.out.println(user.getKeyManagement().getReloadButton());
                 if (App.getApp().getLoggedInUser().getKeyManagement().getReloadButton() == Input.Keys.R) {
                     resultLabel.setText(user.translate("settings.controls.reload").replace("{0}", "M"));
                     changeReload.setText(user.translate("button.change") + " " + user.translate("settings.reload") + " (M)");
@@ -303,7 +306,9 @@ public class SettingsController {
                     changeReload.setText(user.translate("button.change") + " " + user.translate("settings.reload") + " (R)");
                     App.getApp().getLoggedInUser().getKeyManagement().setReloadButton(Input.Keys.R);
                 }
-                updateAllButtonStates();
+//                updateAllButtonStates();
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -322,7 +327,9 @@ public class SettingsController {
                     changeAutoAim.setText(user.translate("button.change") + " " + user.translate("settings.auto_aim") + " (SPACE)");
                     App.getApp().getLoggedInUser().getKeyManagement().setAutoAimButton(Input.Keys.SPACE);
                 }
-                updateAllButtonStates();
+//                updateAllButtonStates();
+                game.getScreen().dispose();
+                game.setScreen(new SettingsView());
             }
         });
     }
@@ -342,8 +349,8 @@ public class SettingsController {
     }
 
     private void updateAllButtonStates() {
+        App.getApp().setLoggedInUser(App.getApp().getLoggedInUser());
         User user = App.getApp().getLoggedInUser();
-        
         // Update toggle buttons
         greyScale.setText(user.isGray() ? 
             user.translate("settings.ungray_scale") + " ✓" : 

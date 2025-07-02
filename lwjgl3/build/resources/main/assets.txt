@@ -2,6 +2,7 @@ AudioClip/Big_Weapon_Whoosh.wav
 AudioClip/Explosion_Blood_01.wav
 AudioClip/Powerup.wav
 AudioClip/UI Click 36.wav
+AudioClip/Weapon_Shotgun_Reload.wav
 AudioClip/YouLose.wav
 AudioClip/YouWin.wav
 AudioClip/click.wav
@@ -237,6 +238,10 @@ custom_avatars/custom_1749147791084.png
 custom_avatars/custom_1749227154591.png
 custom_avatars/custom_1749227183645.png
 custom_avatars/custom_1749227193823.png
+custom_avatars/custom_1749290376930.png
+custom_avatars/custom_1749400279550.png
+custom_avatars/custom_1749409793307.png
+custom_avatars/custom_1749409801256.png
 libgdx.png
 light_mask.png
 profiles/1.png
@@ -249,6 +254,7 @@ skin/font-title-export.fnt
 skin/pixthulhu-ui.atlas
 skin/pixthulhu-ui.json
 skin/pixthulhu-ui.png
+skin/pixthulhu-ui1.png
 skin/skin1/Orbitron.ttf
 skin/skin1/font-export.fnt
 skin/skin1/font-over-export.fnt

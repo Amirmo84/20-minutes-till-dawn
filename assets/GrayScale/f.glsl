@@ -15,5 +15,5 @@ void main() {
     float dist = distance(gl_FragCoord.xy, u_lightPos);
     float factor = clamp(1.0 - (dist / u_radius), 0.0, 1.0);
 
-    gl_FragColor = texColor * (0.8 + 0.7 * factor); // Outside: dark (30%), Inside: full brightness
+    gl_FragColor = texColor * (0.8 + 0.7 * factor); // Very dark outside
 }

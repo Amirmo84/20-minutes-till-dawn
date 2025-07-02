@@ -57,7 +57,7 @@ public class PlayerController {
         stateTime += delta;
         TillDawn.getTillDawn().getLightShader().setUniformf("u_lightPos", Gdx.graphics.getWidth() / 2f + 700, Gdx.graphics.getHeight() / 2f + 550);
 
-        TillDawn.getTillDawn().getLightShader().setUniformf("u_radius", 250f);
+        TillDawn.getTillDawn().getLightShader().setUniformf("u_radius", 350f);
         weaponController.update(delta);
     }
 
@@ -115,8 +115,15 @@ public class PlayerController {
         if (Gdx.input.isKeyJustPressed(player.getUser().getKeyManagement().getAutoAimButton())) {
             autoAim();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)){
+            if (game.getElderBoss() != null){
+                game.getElderBoss().setHp(10);
+            }
+        }
         if(Gdx.input.isKeyJustPressed(player.getUser().getKeyManagement().getReloadButton())) {
             player.setReloading(true);
+            player.getUser().getSfxManager().setSound(GameAssetManager.getManager().getReloadSound());
+            player.getUser().getSfxManager().play();
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -129,10 +136,6 @@ public class PlayerController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             gameView.setPaused(!gameView.isPaused());
             return;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
-            TillDawn.getTillDawn().getScreen().dispose();
-            TillDawn.getTillDawn().setScreen(new SettingsView());
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             float time = Math.min(game.getMaxTime(), game.getTimeGone() + 60);
@@ -217,28 +220,20 @@ public class PlayerController {
         }
     }
 
-//    private void handleOutOfBounds() {
-//        if (x < player.getGridPos().getX()) {
-//            player.getGridPos().setX(x);
-//        }
-//        if (x > player.getGridPos().getX() + gameView.getBackgroundWidth() - width) {
-//            player.getGridPos().setX(x - gameView.getBackgroundWidth() + width);
-//        }
-//        if (y < player.getGridPos().getY()) {
-//            player.getGridPos().setY(y);
-//        }
-//        if (y > player.getGridPos().getY() + gameView.getBackgroundHeight() - height) {
-//            player.getGridPos().setY(y - gameView.getBackgroundHeight() + height);
-//        }
-//    }
-//
-//    public boolean isPlayerXOutOfBounds() {
-//        return x < player.getGridPos().getX() || x > player.getGridPos().getX() + gameView.getBackgroundWidth();
-//    }
-//
-//    public boolean isPlayerYOutOfBounds() {
-//        return y < player.getGridPos().getY() || y > player.getGridPos().getY() + gameView.getBackgroundHeight();
-//    }
+    public void handleOutOfBounds() {
+        if (x < player.getGridPos().getX()) {
+            player.getGridPos().setX(x);
+        }
+        if (x > player.getGridPos().getX() + gameView.getBackgroundWidth() * 2.3 - width) {
+            player.getGridPos().setX(x - gameView.getBackgroundWidth() * 2.3f + width);
+        }
+        if (y < player.getGridPos().getY()) {
+            player.getGridPos().setY(y);
+        }
+        if (y > player.getGridPos().getY() + gameView.getBackgroundHeight() * 2.3 - height) {
+            player.getGridPos().setY(y - gameView.getBackgroundHeight() * 2.3f + height);
+        }
+    }
 
     public void setX(float x) {
         this.x = x;

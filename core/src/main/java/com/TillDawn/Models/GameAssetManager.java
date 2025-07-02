@@ -44,6 +44,7 @@ public class GameAssetManager {
     private final Animation<TextureRegion> bossAnimation = new Animation<>(0.2f, getBossFrames());
     private final Sound youWinSound = Gdx.audio.newSound(Gdx.files.internal(Paths.WIN.getPath()));
     private final Sound youLoseSound = Gdx.audio.newSound(Gdx.files.internal(Paths.LOSE.getPath()));
+    private final Sound reloadSound = Gdx.audio.newSound(Gdx.files.internal(Paths.RELOADSOUND.getPath()));
     private final Sound levelUp = Gdx.audio.newSound(Gdx.files.internal(Paths.LevelUp.getPath()));
     private final Image pregameBackground = new Image(new Texture(Gdx.files.internal(Paths.PregameBackground.getPath())));
     private final Image othersBackGround = new Image(new Texture(Gdx.files.internal(Paths.OthersBackground.getPath())));
@@ -226,5 +227,9 @@ public class GameAssetManager {
 
     public Image getOthersBackGround() {
         return othersBackGround;
+    }
+
+    public Sound getReloadSound() {
+        return reloadSound;
     }
 }

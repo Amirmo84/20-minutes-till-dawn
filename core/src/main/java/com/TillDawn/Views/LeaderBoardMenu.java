@@ -125,7 +125,7 @@ public class LeaderBoardMenu implements Screen {
             else if (i == 2) rowColor = new Color(0.8f, 0.5f, 0.2f, 1f);
 
             if(player.getUsername().equals(user != null ? user.getUsername() : "")) {
-                rowColor = Color.BLUE;
+                rowColor = Color.GREEN;
             }
 
             Label rankLabel = new Label((i + 1) + ".", skin);

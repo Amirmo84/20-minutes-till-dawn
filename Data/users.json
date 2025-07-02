@@ -17,6 +17,9 @@
 	"password": "qweR123$",
 	"answer": "What is your favourite animal?",
 	"avatarPath": "profiles/4.png",
+	"score": 11487.925,
+	"kills": 77,
+	"maxTimeLived": 206.1225,
 	"keyManagment": {},
 	"sfxManager": {}
 },
@@ -53,6 +56,15 @@
 	"password": "qwerW123$",
 	"answer": "What is your favourite animal?",
 	"avatarPath": "profiles/3.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "fsdfdfg",
+	"password": "dsadWEer#4q32",
+	"answer": "What is your favourite animal?",
+	"avatarPath": "profiles/2.png",
 	"keyManagment": {},
 	"sfxManager": {}
 },
@@ -272,17 +284,442 @@
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "fsdfdfg",
-	"password": "dsadWEer#4q32",
-	"answer": "What is your favourite animal?",
-	"avatarPath": "profiles/2.png",
+	"username": "Guest17492330",
+	"avatarPath": "profiles/1.png",
 	"keyManagment": {},
 	"sfxManager": {}
 },
 {
 	"class": "com.TillDawn.Models.User",
-	"username": "Guest17492330",
+	"username": "Guest17492854",
 	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492857",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492858",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492863",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {
+		"reloadButton": 41,
+		"autoAimButton": 44,
+		"up": 19,
+		"down": 20,
+		"left": 21,
+		"right": 22
+	},
+	"isControlDefault": false,
+	"reloadAuto": false,
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492864",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {
+		"reloadButton": 41,
+		"autoAimButton": 44
+	},
+	"reloadAuto": false,
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492865",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17492866",
+	"avatarPath": "profiles/1.png",
+	"score": 48.707153,
+	"kills": 2,
+	"maxTimeLived": 24.353577,
+	"keyManagment": {
+		"reloadButton": 41,
+		"autoAimButton": 44
+	},
+	"reloadAuto": false,
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17493766",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494003",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494006",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494008",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494022",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494023",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494023",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494023",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494024",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494038",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494096",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494102",
+	"avatarPath": "profiles/1.png",
+	"score": 145.62547,
+	"kills": 5,
+	"maxTimeLived": 29.125095,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494108",
+	"avatarPath": "profiles/1.png",
+	"score": 384.69598,
+	"kills": 6,
+	"maxTimeLived": 64.116,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494113",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494115",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494117",
+	"avatarPath": "profiles/1.png",
+	"score": 58.07505,
+	"kills": 2,
+	"maxTimeLived": 29.037525,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494119",
+	"avatarPath": "profiles/1.png",
+	"score": 256.74625,
+	"kills": 4,
+	"maxTimeLived": 64.18656,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494121",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494125",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494126",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494127",
+	"avatarPath": "profiles/1.png",
+	"score": 113.074394,
+	"kills": 2,
+	"maxTimeLived": 56.537197,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494134",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494134",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494135",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494185",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494186",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494187",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494192",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494200",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494201",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494227",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494228",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494229",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494230",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494232",
+	"avatarPath": "profiles/1.png",
+	"score": 5098.8027,
+	"kills": 39,
+	"maxTimeLived": 1200,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Hello",
+	"password": "qwerR12#4",
+	"answer": "to",
+	"avatarPath": "assets/custom_avatars/custom_1749409801256.png",
+	"score": 1419.9065,
+	"kills": 13,
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494599",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494606",
+	"avatarPath": "profiles/1.png",
+	"score": 1592.915,
+	"kills": 13,
+	"maxTimeLived": 122.53192,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494608",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494611",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17494613",
+	"avatarPath": "profiles/1.png",
+	"score": 796.85004,
+	"kills": 10,
+	"maxTimeLived": 79.685005,
+	"keyManagment": {},
+	"isGray": true,
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17506921",
+	"avatarPath": "profiles/1.png",
+	"score": 900,
+	"kills": 3,
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17507633",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17512024",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 300,
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17513621",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17513622",
+	"avatarPath": "profiles/1.png",
+	"keyManagment": {},
+	"sfxManager": {}
+},
+{
+	"class": "com.TillDawn.Models.User",
+	"username": "Guest17514492",
+	"avatarPath": "profiles/1.png",
+	"maxTimeLived": 2.1766338,
 	"keyManagment": {},
 	"sfxManager": {}
 }

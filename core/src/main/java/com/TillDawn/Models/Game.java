@@ -19,7 +19,7 @@ public class Game {
     private ElderBoss elderBoss = null;
 
     public Game() {
-        initializeTrees(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50);
+        initializeTrees(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 60);
     }
 
     public void updateItemsTime(float time){
@@ -58,8 +58,8 @@ public class Game {
 
     public void initializeTrees(float xBound, float yBound, int count) {
         for (int i = 0; i < count; i++) {
-            float xPos = (float) (Math.random() * (xBound * 3));
-            float yPos = (float) (Math.random() * (yBound * 3));
+            float xPos = (float) (Math.random() * (xBound * 4));
+            float yPos = (float) (Math.random() * (yBound * 4));
             Tree tree = new Tree(xPos, yPos);
             trees.add(tree);
         }
